@@ -1,0 +1,435 @@
+aL 48.96742913105711
+The last 6 runs
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/run/generated.py::
+start: Tue, 27 Oct 2026 15:40:09; stop: 15:40:10; duration: 1.1 s
+/tmp_14_days/srio//tmp.py::
+start: Tue, 27 Oct 2026 15:53:15; stop: 15:53:35; duration: 19.5 s
+/usr/lib/python3.12/inspect.py::
+start: Tue, 27 Oct 2026 16:00:29; stop: 16:00:48; duration: 19.5 s
+/usr/lib/python3.12/inspect.py::
+start: Tue, 27 Oct 2026 16:18:46; stop: 16:19:09; duration: 22.8 s
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/xrtcodes/XRT_SSU_SBDL.py::
+start: Tue, 27 Oct 2026 16:29:36; stop: 16:29:38; duration: 2.4 s
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/xrtcodes/XRT_BNL_SBDL.py::
+start: Tue, 27 Oct 2026 16:29:46; stop: 16:30:02; duration: 16.0 s
+energy 30000.0 eV, 1 of 16
+The job is running... 
+51418 rays of 500000
+103385 rays of 500000
+155057 rays of 500000
+206721 rays of 500000
+258302 rays of 500000
+309860 rays of 500000
+361356 rays of 500000
+413069 rays of 500000
+464630 rays of 500000
+516349 rays of 500000
+
+Broad Fcurv optimization...
+
+Broad Fcurv result: 1.150000000
+Fine Fcurv search: 1.135000000 to 1.165000000
+
+Optimized geometry correction: Fcurv=1.154875000 (optimization method=ML, final method=ML)
+
+Calculating broad caustic...
+Broad horizontal focus: 53200.000 mm
+Horizontal focus: 53020.000000 mm
+Minimum horizontal FWHM: 1.152375e-02 mm
+Vertical focus: 53120.000000 mm
+Minimum vertical FWHM: 1.336880e+00 mm
+1 calculation step took 31.1 s
+30000.000000	7.54891785e+13	8.06362666e+11	3.68311638e+12	1.62842881e-01	1.25000000e+00	1.42379891e+00	9.39448718e-02	1.35919357e-02	225195.934943	2473.430702	41877.912060
+
+energy 32000.0 eV, 2 of 16
+50195 rays of 500000
+100054 rays of 500000
+149933 rays of 500000
+199897 rays of 500000
+249636 rays of 500000
+299876 rays of 500000
+349840 rays of 500000
+399882 rays of 500000
+449972 rays of 500000
+499330 rays of 500000
+549325 rays of 500000
+
+Previous-energy Fcurv: 1.154875000
+Fine Fcurv search: 1.139875000 to 1.169875000
+
+Optimized geometry correction: Fcurv=1.152375000 (optimization method=ML, final method=ML)
+Horizontal focus: 53184.000000 mm
+Minimum horizontal FWHM: 1.186365e-02 mm
+Vertical focus: 53215.000000 mm
+Minimum vertical FWHM: 1.489415e+00 mm
+2 calculation steps took 65.9 s
+32000.000000	6.95440761e+13	8.88968565e+11	4.55807855e+12	1.29316406e-01	1.40000000e+00	1.43157923e+00	9.39448718e-02	2.00649086e-02	222720.422854	2318.776338	39259.442953
+
+energy 34000.0 eV, 3 of 16
+48531 rays of 500000
+96765 rays of 500000
+144932 rays of 500000
+193232 rays of 500000
+241687 rays of 500000
+289548 rays of 500000
+337985 rays of 500000
+386194 rays of 500000
+434487 rays of 500000
+482512 rays of 500000
+530264 rays of 500000
+
+Previous-energy Fcurv: 1.152375000
+Fine Fcurv search: 1.137375000 to 1.167375000
+
+Optimized geometry correction: Fcurv=1.151750000 (optimization method=ML, final method=ML)
+Horizontal focus: 53211.000000 mm
+Minimum horizontal FWHM: 1.444281e-02 mm
+Vertical focus: 53158.000000 mm
+Minimum vertical FWHM: 1.644557e+00 mm
+3 calculation steps took 101.6 s
+34000.000000	6.41325400e+13	9.29544202e+11	4.24885561e+12	1.43684895e-01	1.45000000e+00	1.43157923e+00	7.51558974e-02	2.55275445e-02	220933.190587	2182.315596	36949.011972
+
+energy 36000.0 eV, 4 of 16
+46529 rays of 500000
+93074 rays of 500000
+139963 rays of 500000
+186699 rays of 500000
+233356 rays of 500000
+280252 rays of 500000
+326900 rays of 500000
+373976 rays of 500000
+420374 rays of 500000
+466985 rays of 500000
+513779 rays of 500000
+
+Previous-energy Fcurv: 1.151750000
+Fine Fcurv search: 1.136750000 to 1.166750000
+
+Optimized geometry correction: Fcurv=1.153000000 (optimization method=ML, final method=ML)
+Horizontal focus: 53017.000000 mm
+Minimum horizontal FWHM: 1.452707e-02 mm
+Vertical focus: 53080.000000 mm
+Minimum vertical FWHM: 1.832912e+00 mm
+4 calculation steps took 141.0 s
+36000.000000	5.90257542e+13	9.68309315e+11	3.48987182e+12	1.43684895e-01	1.80000000e+00	1.43935955e+00	7.51558974e-02	3.08900041e-02	219648.629723	2061.016188	34895.279102
+
+energy 38000.0 eV, 5 of 16
+45373 rays of 500000
+90627 rays of 500000
+135877 rays of 500000
+181385 rays of 500000
+227011 rays of 500000
+272259 rays of 500000
+317922 rays of 500000
+363430 rays of 500000
+408622 rays of 500000
+453942 rays of 500000
+499402 rays of 500000
+544906 rays of 500000
+
+Previous-energy Fcurv: 1.153000000
+Fine Fcurv search: 1.138000000 to 1.168000000
+
+Optimized geometry correction: Fcurv=1.151125000 (optimization method=ML, final method=ML)
+Horizontal focus: 53209.000000 mm
+Minimum horizontal FWHM: 1.549582e-02 mm
+Vertical focus: 53212.000000 mm
+Minimum vertical FWHM: 1.921497e+00 mm
+5 calculation steps took 186.7 s
+38000.000000	5.43944604e+13	1.01637007e+12	3.58863943e+12	1.58053385e-01	1.70000000e+00	1.43157923e+00	7.51558974e-02	3.81149639e-02	218741.360577	1952.484205	33057.712822
+
+energy 40000.0 eV, 6 of 16
+44000 rays of 500000
+87904 rays of 500000
+132175 rays of 500000
+176433 rays of 500000
+220769 rays of 500000
+264916 rays of 500000
+308875 rays of 500000
+352245 rays of 500000
+396283 rays of 500000
+440322 rays of 500000
+484376 rays of 500000
+528242 rays of 500000
+
+Previous-energy Fcurv: 1.151125000
+Fine Fcurv search: 1.136125000 to 1.166125000
+
+Optimized geometry correction: Fcurv=1.152375000 (optimization method=ML, final method=ML)
+Horizontal focus: 53203.000000 mm
+Minimum horizontal FWHM: 1.331988e-02 mm
+Vertical focus: 53144.000000 mm
+Minimum vertical FWHM: 1.998973e+00 mm
+6 calculation steps took 233.9 s
+40000.000000	5.00046381e+13	1.01118867e+12	3.30784173e+12	1.43684895e-01	1.95000000e+00	1.42379891e+00	7.51558974e-02	5.32996386e-02	218124.127381	1854.804522	31403.887963
+
+energy 42000.0 eV, 7 of 16
+42660 rays of 500000
+85517 rays of 500000
+128428 rays of 500000
+171158 rays of 500000
+214432 rays of 500000
+257147 rays of 500000
+300291 rays of 500000
+343120 rays of 500000
+386127 rays of 500000
+429046 rays of 500000
+471821 rays of 500000
+514784 rays of 500000
+
+Previous-energy Fcurv: 1.152375000
+Fine Fcurv search: 1.137375000 to 1.167375000
+
+Optimized geometry correction: Fcurv=1.152375000 (optimization method=ML, final method=ML)
+Horizontal focus: 53032.000000 mm
+Minimum horizontal FWHM: 2.006015e-02 mm
+Vertical focus: 53382.000000 mm
+Minimum vertical FWHM: 2.057714e+00 mm
+7 calculation steps took 284.6 s
+42000.000000	4.58997633e+13	1.04489560e+12	3.34224947e+12	1.38895399e-01	2.10000000e+00	1.43157923e+00	7.51558974e-02	5.85252401e-02	217734.670810	1766.426802	29907.555611
+
+energy 44000.0 eV, 8 of 16
+41530 rays of 500000
+83675 rays of 500000
+125677 rays of 500000
+167782 rays of 500000
+209680 rays of 500000
+251678 rays of 500000
+293836 rays of 500000
+335603 rays of 500000
+377314 rays of 500000
+418972 rays of 500000
+460705 rays of 500000
+502293 rays of 500000
+
+Previous-energy Fcurv: 1.152375000
+Fine Fcurv search: 1.137375000 to 1.167375000
+
+Optimized geometry correction: Fcurv=1.150500000 (optimization method=ML, final method=ML)
+Horizontal focus: 52928.000000 mm
+Minimum horizontal FWHM: 2.567459e-02 mm
+Vertical focus: 52976.000000 mm
+Minimum vertical FWHM: 2.106531e+00 mm
+8 calculation steps took 339.0 s
+44000.000000	4.21517969e+13	1.05465327e+12	3.47382034e+12	1.48474392e-01	1.95000000e+00	1.43157923e+00	7.51558974e-02	6.38905343e-02	217527.613868	1686.082590	28547.239405
+
+energy 46000.0 eV, 9 of 16
+40860 rays of 500000
+81865 rays of 500000
+122979 rays of 500000
+163847 rays of 500000
+204527 rays of 500000
+245546 rays of 500000
+286288 rays of 500000
+327062 rays of 500000
+368181 rays of 500000
+408929 rays of 500000
+449701 rays of 500000
+490467 rays of 500000
+531371 rays of 500000
+
+Previous-energy Fcurv: 1.150500000
+Fine Fcurv search: 1.135500000 to 1.165500000
+
+Optimized geometry correction: Fcurv=1.151750000 (optimization method=ML, final method=ML)
+Horizontal focus: 52996.000000 mm
+Minimum horizontal FWHM: 3.384100e-02 mm
+Vertical focus: 52849.000000 mm
+Minimum vertical FWHM: 2.270563e+00 mm
+9 calculation steps took 399.7 s
+46000.000000	3.86544256e+13	1.02180842e+12	3.38915529e+12	1.34105902e-01	2.15000000e+00	1.43935955e+00	7.51558974e-02	7.95059847e-02	217469.273970	1612.724030	27305.198024
+
+energy 48000.0 eV, 10 of 16
+39733 rays of 500000
+79375 rays of 500000
+119015 rays of 500000
+159011 rays of 500000
+199145 rays of 500000
+238997 rays of 500000
+278766 rays of 500000
+318647 rays of 500000
+358234 rays of 500000
+398221 rays of 500000
+437932 rays of 500000
+477522 rays of 500000
+517361 rays of 500000
+
+Previous-energy Fcurv: 1.151750000
+Fine Fcurv search: 1.136750000 to 1.166750000
+
+Optimized geometry correction: Fcurv=1.149250000 (optimization method=ML, final method=ML)
+Horizontal focus: 53077.000000 mm
+Minimum horizontal FWHM: 3.068901e-02 mm
+Vertical focus: 53159.000000 mm
+Minimum vertical FWHM: 2.431132e+00 mm
+10 calculation steps took 463.9 s
+48000.000000	3.53573836e+13	1.02585675e+12	2.98122915e+12	1.43684895e-01	2.30000000e+00	1.45492020e+00	7.51558974e-02	9.07972391e-02	217534.248345	1545.477914	26166.647047
+
+energy 50000.0 eV, 11 of 16
+39135 rays of 500000
+77863 rays of 500000
+116624 rays of 500000
+155793 rays of 500000
+194761 rays of 500000
+234147 rays of 500000
+273278 rays of 500000
+312239 rays of 500000
+351027 rays of 500000
+389896 rays of 500000
+428936 rays of 500000
+468057 rays of 500000
+507400 rays of 500000
+
+Previous-energy Fcurv: 1.149250000
+Fine Fcurv search: 1.134250000 to 1.164250000
+
+Optimized geometry correction: Fcurv=1.153000000 (optimization method=ML, final method=ML)
+Horizontal focus: 53149.000000 mm
+Minimum horizontal FWHM: 2.158667e-02 mm
+Vertical focus: 53192.000000 mm
+Minimum vertical FWHM: 2.436463e+00 mm
+11 calculation steps took 531.4 s
+50000.000000	3.23798686e+13	1.01831820e+12	2.65579824e+12	1.38895399e-01	2.50000000e+00	1.43935955e+00	7.51558974e-02	1.07170260e-01	217703.109376	1483.610744	25119.167570
+
+energy 52000.0 eV, 12 of 16
+37950 rays of 500000
+76328 rays of 500000
+114515 rays of 500000
+152663 rays of 500000
+190996 rays of 500000
+229220 rays of 500000
+267415 rays of 500000
+305475 rays of 500000
+343817 rays of 500000
+381865 rays of 500000
+419910 rays of 500000
+458069 rays of 500000
+495999 rays of 500000
+534094 rays of 500000
+
+Previous-energy Fcurv: 1.153000000
+Fine Fcurv search: 1.138000000 to 1.168000000
+
+Optimized geometry correction: Fcurv=1.151750000 (optimization method=ML, final method=ML)
+Horizontal focus: 52975.000000 mm
+Minimum horizontal FWHM: 3.130024e-02 mm
+Vertical focus: 53114.000000 mm
+Minimum vertical FWHM: 2.591876e+00 mm
+12 calculation steps took 602.3 s
+52000.000000	2.96345689e+13	1.00192745e+12	2.79683695e+12	1.48474392e-01	2.35000000e+00	1.43935955e+00	5.63669231e-02	1.30322533e-01	217960.814475	1426.501871	24152.251299
+
+energy 54000.0 eV, 13 of 16
+37652 rays of 500000
+75037 rays of 500000
+112129 rays of 500000
+149682 rays of 500000
+187050 rays of 500000
+224361 rays of 500000
+261552 rays of 500000
+299095 rays of 500000
+336411 rays of 500000
+374001 rays of 500000
+411422 rays of 500000
+448592 rays of 500000
+486100 rays of 500000
+523186 rays of 500000
+
+Previous-energy Fcurv: 1.151750000
+Fine Fcurv search: 1.136750000 to 1.166750000
+
+Optimized geometry correction: Fcurv=1.150500000 (optimization method=ML, final method=ML)
+Horizontal focus: 52943.000000 mm
+Minimum horizontal FWHM: 8.179240e-02 mm
+Vertical focus: 53128.000000 mm
+Minimum vertical FWHM: 2.438826e+00 mm
+13 calculation steps took 681.3 s
+54000.000000	2.72635363e+13	9.95032687e+11	2.82643194e+12	1.34105902e-01	2.25000000e+00	1.44713987e+00	5.63669231e-02	1.37031740e-01	218295.587429	1373.622591	23256.946730
+
+energy 56000.0 eV, 14 of 16
+36406 rays of 500000
+72977 rays of 500000
+109496 rays of 500000
+145879 rays of 500000
+182671 rays of 500000
+219393 rays of 500000
+255781 rays of 500000
+292118 rays of 500000
+328515 rays of 500000
+365093 rays of 500000
+401914 rays of 500000
+438749 rays of 500000
+475302 rays of 500000
+511878 rays of 500000
+
+Previous-energy Fcurv: 1.150500000
+Fine Fcurv search: 1.135500000 to 1.165500000
+
+Optimized geometry correction: Fcurv=1.149250000 (optimization method=ML, final method=ML)
+Horizontal focus: 52810.000000 mm
+Minimum horizontal FWHM: 7.397422e-02 mm
+Vertical focus: 52917.000000 mm
+Minimum vertical FWHM: 2.515637e+00 mm
+14 calculation steps took 763.8 s
+56000.000000	2.48488760e+13	9.55899557e+11	2.57373102e+12	1.53263888e-01	2.30000000e+00	1.44713987e+00	5.63669231e-02	1.87624695e-01	218698.117712	1324.519734	22425.581151
+
+energy 58000.0 eV, 15 of 16
+35901 rays of 500000
+71836 rays of 500000
+108049 rays of 500000
+143873 rays of 500000
+179685 rays of 500000
+215371 rays of 500000
+251019 rays of 500000
+286643 rays of 500000
+322563 rays of 500000
+358762 rays of 500000
+394493 rays of 500000
+430207 rays of 500000
+466107 rays of 500000
+501825 rays of 500000
+
+Previous-energy Fcurv: 1.149250000
+Fine Fcurv search: 1.134250000 to 1.164250000
+
+Optimized geometry correction: Fcurv=1.151750000 (optimization method=ML, final method=ML)
+Horizontal focus: 52923.000000 mm
+Minimum horizontal FWHM: 4.953768e-02 mm
+Vertical focus: 52652.000000 mm
+Minimum vertical FWHM: 2.731482e+00 mm
+15 calculation steps took 848.0 s
+58000.000000	2.28137323e+13	9.38391051e+11	2.57585841e+12	1.43684895e-01	2.40000000e+00	1.44713987e+00	5.63669231e-02	1.83330694e-01	219160.978443	1278.802632	21651.540158
+
+energy 60000.0 eV, 16 of 16
+35373 rays of 500000
+70467 rays of 500000
+105866 rays of 500000
+141041 rays of 500000
+175876 rays of 500000
+210961 rays of 500000
+246085 rays of 500000
+281427 rays of 500000
+316662 rays of 500000
+352091 rays of 500000
+387370 rays of 500000
+422767 rays of 500000
+457963 rays of 500000
+493204 rays of 500000
+528085 rays of 500000
+
+Previous-energy Fcurv: 1.151750000
+Fine Fcurv search: 1.136750000 to 1.166750000
+
+Optimized geometry correction: Fcurv=1.151125000 (optimization method=ML, final method=ML)
+Horizontal focus: 52993.000000 mm
+Minimum horizontal FWHM: 6.463871e-02 mm
+Vertical focus: 53048.000000 mm
+Minimum vertical FWHM: 2.879053e+00 mm
+16 calculation steps took 935.8 s
+60000.000000	2.07921598e+13	8.75141947e+11	2.23589692e+12	1.48474392e-01	2.50000000e+00	1.44713987e+00	7.51558974e-02	2.11166181e-01	219678.197348	1236.132710	20929.091271
+
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/run_XRT_APS_BLM/../XRT_APS_BLM.py:912: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+finished
+/home/srio/venv/oasys2/lib/python3.12/site-packages/xrt/runner.py:720: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+EXIT 0

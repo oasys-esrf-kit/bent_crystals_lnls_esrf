@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="BNL_SBDL 40 keV" description="BNL_SBDL (XRT_BNL_SBDL.py) at 40 keV: wiggler K=16.5, mask and diamond+SiC filters at 10 m, bent Si(111) double Laue (ML) at 32.3 m, Pt mirror M1 at 40.1 m, screen at 56.4 m" working_directory="/home/srio/Desktop/BRASIL/SRIO/XRTcodes/oasys_BNL_SBDL">
+	<nodes>
+		<node id="0" name="Wiggler Light Source" qualified_name="orangecontrib.xrt.widgets.light_sources.ow_wiggler_light_source.OWWigglerLightSource" project_name="OASYS2-XRT" version="" title="Wiggler Light Source" position="(100.0, 400.0)" />
+		<node id="1" name="Rectangular Aperture" qualified_name="orangecontrib.xrt.widgets.beamline_elements.ow_rectangular_aperture.OWRectangularAperture" project_name="OASYS2-XRT" version="" title="Rectangular Aperture" position="(230.0, 400.0)" />
+		<node id="2" name="Plate" qualified_name="orangecontrib.xrt.widgets.beamline_elements.ow_plate.OWPlate" project_name="OASYS2-XRT" version="" title="Plate Filter1" position="(360.0, 400.0)" />
+		<node id="3" name="Plate" qualified_name="orangecontrib.xrt.widgets.beamline_elements.ow_plate.OWPlate" project_name="OASYS2-XRT" version="" title="Plate Filter2" position="(490.0, 400.0)" />
+		<node id="4" name="Bent Crystal 2D" qualified_name="orangecontrib.xrt.widgets.beamline_elements.ow_bent_crystal_2d.OWBentCrystal2D" project_name="OASYS2-XRT" version="" title="Bent Crystal 2D LaueC1" position="(620.0, 400.0)" />
+		<node id="5" name="Bent Crystal 2D" qualified_name="orangecontrib.xrt.widgets.beamline_elements.ow_bent_crystal_2d.OWBentCrystal2D" project_name="OASYS2-XRT" version="" title="Bent Crystal 2D LaueC2" position="(750.0, 400.0)" />
+		<node id="6" name="Toroid Mirror Distorted" qualified_name="orangecontrib.xrt.widgets.beamline_elements.ow_toroid_mirror_distorted.OWToridMirrorDistorted" project_name="OASYS2-XRT" version="" title="Toroid Mirror Distorted" position="(880.0, 400.0)" />
+		<node id="7" name="Screen" qualified_name="orangecontrib.xrt.widgets.beamline_elements.ow_screen.OWScreen" project_name="OASYS2-XRT" version="" title="Screen" position="(1010.0, 400.0)" />
+		<node id="8" name="XRT Runner Python Script" qualified_name="orangecontrib.xrt.widgets.tools.ow_xrt_runner.OWRunner" project_name="OASYS2-XRT" version="" title="XRT Runner Python Script" position="(1140.0, 400.0)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="XRTData" sink_channel="XRTData" enabled="true" source_channel_id="data" sink_channel_id="xrt_data" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="XRTData" sink_channel="XRTData" enabled="true" source_channel_id="data" sink_channel_id="xrt_data" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="XRTData" sink_channel="XRTData" enabled="true" source_channel_id="data" sink_channel_id="xrt_data" />
+		<link id="3" source_node_id="3" sink_node_id="4" source_channel="XRTData" sink_channel="XRTData" enabled="true" source_channel_id="data" sink_channel_id="xrt_data" />
+		<link id="4" source_node_id="4" sink_node_id="5" source_channel="XRTData" sink_channel="XRTData" enabled="true" source_channel_id="data" sink_channel_id="xrt_data" />
+		<link id="5" source_node_id="5" sink_node_id="6" source_channel="XRTData" sink_channel="XRTData" enabled="true" source_channel_id="data" sink_channel_id="xrt_data" />
+		<link id="6" source_node_id="6" sink_node_id="7" source_channel="XRTData" sink_channel="XRTData" enabled="true" source_channel_id="data" sink_channel_id="xrt_data" />
+		<link id="7" source_node_id="7" sink_node_id="8" source_channel="XRTData" sink_channel="XRTData" enabled="true" source_channel_id="data" sink_channel_id="xrt_data" />
+	</links>
+	<annotations />
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="literal">{'source_name': 'DW100', 'center': '[0,0,0]', 'K': 16.5, 'period': 100.0, 'n': 68, 'eE': 3.0, 'eI': 0.1, 'eEpsilonX': 0.9042, 'eEpsilonZ': 0.00784, 'eSpread': 0.0, 'eSigmaX': 137.0, 'eSigmaZ': 4.9, 'xPrimeMax': 1.1, 'zPrimeMax': 0.1, 'distE': 'eV', 'eMin': 39920.0, 'eMax': 40080.0, 'nrays': 500000, 'controlAreaVisible': True, '__version__': 1}</properties>
+		<properties node_id="1" format="literal">{'is_automatic_run': 1, 'use_for_plot': 0, 'limits_for_plot': '-100,100,-50,50', 'oe_name': 'Mask1', 'center': '[0, 10000, 0]', 'phg': 11000.0, 'pvg': 1000.0, 'controlAreaVisible': True, '__version__': 1}</properties>
+		<properties node_id="2" format="literal">{'is_automatic_run': 1, 'use_for_plot': 0, 'limits_for_plot': '-100,100,-50,50', 'oe_name': 'Filter1', 'center': '[0, 10000, 0]', 'pitch': 'np.pi/2', 'material': "Material('C', rho=3.52, kind='plate')", 't': 2.0, 'surface': "'diamond 2 mm'", 'controlAreaVisible': True, '__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'is_automatic_run': 1, 'use_for_plot': 0, 'limits_for_plot': '-100,100,-50,50', 'oe_name': 'Filter2', 'center': '[0, 10004, 0]', 'pitch': 'np.pi/2', 'material': "Material(elements=['Si', 'C'], quantities=[1, 1], kind='plate', rho=3.21)", 't': 4.8, 'surface': "'SiC 4.8 mm'", 'controlAreaVisible': True, '__version__': 1}</properties>
+		<properties node_id="4" format="literal">{'is_automatic_run': 1, 'use_for_plot': 0, 'limits_for_plot': '-100,100,-50,50', 'pitch': 'np.pi/2 + alpha + thetaB', 'alignment_energy': 40000.0, 'limPhysX': '[-50, 50]', 'limPhysY': '[-50, 50]', 'geom': 0, 'hkl': '[1, 1, 1]', 'nrm': '[1, 0, 0]', 'sag': '[0, -1, 1]', 't': 0.7, 'C0': '[165.7, 63.9, 79.6]', 'Rm': 50670.4309, 'Rs': -1575.6831, 'Fcurv': 1.02, 'method': 1, 'PP_center_fraction': 0.5, 'oe_name': 'LaueC1', 'center': '[0, 32300, 0]', 'alpha': 'alpha_hkl_nrm', 'ML_sign': 1.0, 'controlAreaVisible': True, '__version__': 1}</properties>
+		<properties node_id="5" format="literal">{'is_automatic_run': 1, 'use_for_plot': 0, 'limits_for_plot': '-100,100,-50,50', 'pitch': 'np.pi/2 + alpha + thetaB', 'alignment_energy': 40000.0, 'limPhysX': '[-50, 50]', 'limPhysY': '[-50, 50]', 'geom': 0, 'hkl': '[1, 1, 1]', 'nrm': '[1, 0, 0]', 'sag': '[0, -1, 1]', 't': 0.7, 'C0': '[165.7, 63.9, 79.6]', 'Rm': 50670.4309, 'Rs': -1575.6831, 'Fcurv': 1.02, 'method': 1, 'PP_center_fraction': 0.5, 'oe_name': 'LaueC2', 'center': '[0, 32803.8652733817, 50]', 'alpha': '-alpha_hkl_nrm', 'ML_sign': -1.0, 'controlAreaVisible': True, '__version__': 1}</properties>
+		<properties node_id="6" format="literal">{'is_automatic_run': 1, 'use_for_plot': 0, 'limits_for_plot': '-100,100,-50,50', 'oe_name': 'M1', 'center': '[0, 40100, 50]', 'material': "Material('Pt', rho=19.305)", 'R': 13253444.2302, 'r': 1e+30, 'pitch': '0.0017488571428571423', 'yaw': '0.0', 'limPhysX': '[-25, 25]', 'limPhysY': '[-650, 650]', 'modified_surface': 0, 'ms_defect_file_name': '', 'controlAreaVisible': True, '__version__': 1}</properties>
+		<properties node_id="7" format="literal">{'is_automatic_run': 1, 'use_for_plot': 2, 'limits_for_plot': '-1500,1500,-500,500', 'oe_name': 'SCRexp', 'center': '[0, 56400, 107.01274285714284]', 'controlAreaVisible': True, '__version__': 1}</properties>
+		<properties node_id="8" format="literal">{'beamline_name': 'BNL_SBDL_40keV', 'repetition': 1, 'dump_beams_flag': 0, 'dump_scores_flag': 1, 'is_automatic_run': True, 'script_file_flag': 0, 'script_file_name': 'tmp.py', 'controlAreaVisible': True, '__version__': 1}</properties>
+	</node_properties>
+</scheme>

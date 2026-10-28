@@ -1,0 +1,9 @@
+__pycache__/
+# editor swap files
+.*.sw*
+# XRT Runner output folders of the OASYS workspaces
+oasys_*/*keV/
+# leftovers of interrupted test runs in the top folder
+/res_*_energy.txt
+/SSU_BLM_56m_*.png
+/S_tensor.txt
