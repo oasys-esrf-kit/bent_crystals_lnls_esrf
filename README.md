@@ -1,4 +1,4 @@
-# bent_crystals_llnl_esrf
+# bent_crystals_lnls_esrf
 
 Ray-tracing simulations of sagittally focusing bent-crystal monochromators (bent Laue and
 Bragg–Laue), using [xrt](https://github.com/kklmn/xrt) 2.0 and
