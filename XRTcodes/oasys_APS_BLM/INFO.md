@@ -4,6 +4,13 @@ This folder holds an OASYS2 workspace for the APS_BLM beamline of `XRT_APS_BLM.p
 energy, 44 keV, in the middle of the script's flat flux region (38–54 keV). The workspace
 uses OASYS2-XRT widgets only. It has the same structure as `../oasys_SSU_BLM`.
 
+> **Status (2026-10-29): with the fixed ML reflectivity this workspace, like the script,
+> transmits almost nothing.** The Bragg and Laue reflection windows no longer overlap: the
+> Laue crystal sits at its nominal angle, and the model uses the crystal mid-plane as the
+> depth reference. See `../RUN_XRT.md` ("Bragg+Laue beamlines") and its TODO list. The
+> workspace needs the same changes as the script (entrance-surface depth reference, Laue
+> pitch offset; +15 µrad at 44 keV in the test run).
+
 ## Files
 
 | File | Content |
@@ -43,13 +50,17 @@ Six widgets in a chain, each sending XRTData to the next:
 The generated Runner script was run outside the GUI with 200 000 rays. The 500k-ray
 script in this folder has not been run.
 
-| Quantity | OASYS workspace (Fcurv = 1.0) | Original script (Fcurv = 1.1505) |
-|---|---|---|
-| Flux at screen (ph/s) | 1.09×10¹² | 1.05×10¹² |
-| Horizontal FWHM at screen | 0.198 mm | 0.148 mm |
-| Vertical FWHM at screen | 0.90 mm | 1.95 mm |
-| Energy centroid / peak | 44.000 / 44.001 keV | — |
-| Energy FWHM | not output by the Runner | 64 eV |
+| Quantity | Workspace, current code | Script after the fixes | Script test run (entrance ref. + Laue rocking) | Workspace before the ML fix | Script before the fixes (Fcurv = 1.1505) |
+|---|---|---|---|---|---|
+| Flux at screen (ph/s) | **1.20×10⁸** | 1.20×10⁸ | 1.90×10¹¹ | 1.09×10¹² | 1.05×10¹² |
+| Horizontal FWHM at screen | 0.209 mm | 0.203 mm | 0.206 mm | 0.198 mm | 0.148 mm |
+| Vertical FWHM at screen | 1.06 mm | 0.85 mm | 0.70 mm | 0.90 mm | 1.95 mm |
+
+- **Current code:** the workspace agrees with the script after the fixes: about 10⁻⁴ of
+  the old flux, so the sizes come from few rays.
+- **The test run** shows what this beamline gives once the crystals are aligned. It needs
+  changes that are not yet in the code or the widgets.
+- The notes below compare the workspace and the script before the ML fix.
 
 - **Measurement:**
   - The workspace values come from the Runner's plot: 1024 bins, `plot.dx` and `plot.dy`.
@@ -59,8 +70,8 @@ script in this folder has not been run.
 - **Flux** agrees within 3%.
 - **Vertical size:** the vertical beam is about half as large as in the script (see
   difference 1 below).
-- **Reflectivity:** both use the internal ML reflectivity, which is too high for the Laue
-  crystal (see `../BUG_ML.md`).
+- **Reflectivity:** these pre-fix values used the old internal ML reflectivity: Laue too
+  high, Bragg without absorption (see `../BUG_ML.md`).
 
 ## Differences from `XRT_APS_BLM.py`
 

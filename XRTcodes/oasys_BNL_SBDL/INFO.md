@@ -45,16 +45,22 @@ Nine widgets in a chain, each sending XRTData to the next:
 
 ## Results (40 keV)
 
-The generated Runner script was run outside the GUI with 200 000 rays. The 500k-ray
-script in this folder has not been run.
+The generated Runner script was run outside the GUI with 200 000 rays, before and after
+the ML fix. The 500k-ray script in this folder has not been run.
 
-| Quantity | OASYS workspace (Fcurv = 1.02) | Original script (Fcurv = 1.199) |
-|---|---|---|
-| Flux at screen (ph/s) | **1.04×10¹³** | 5.24×10¹² |
-| Horizontal FWHM at screen | 0.50 mm | 0.275 mm |
-| Vertical FWHM at screen | 0.123 mm | 0.126 mm |
-| Energy centroid / peak | 39.993 / 39.994 keV | — |
-| Energy FWHM | not output by the Runner | 46 eV |
+| Quantity | Workspace, current code (Fcurv = 1.02) | Script after the fixes (Fcurv = 1.019) | Workspace before the ML fix | Script before the fixes (Fcurv = 1.199) |
+|---|---|---|---|---|
+| Flux at screen (ph/s) | **1.29×10¹²** | 1.30×10¹² | 1.04×10¹³ | 5.24×10¹² |
+| Horizontal FWHM at screen | 0.38 mm | 0.44 mm | 0.50 mm | 0.275 mm |
+| Vertical FWHM at screen | 0.098 mm | 0.108 mm | 0.123 mm | 0.126 mm |
+| Energy FWHM | not output by the Runner | 35 eV | — | 46 eV |
+
+- **Current code:** the workspace and the script after the fixes agree within 1% in flux.
+- **The ML fix lowers the flux by ×0.12 at 40 keV** (workspace before and after). Together
+  with the ×2 of the geometry fix, the flux is 0.25× the script's old value. Why the ML fix
+  has such a large effect here (two Laue crystals, 0.7 mm) is not understood yet; see the
+  TODO list in `../RUN_XRT.md`.
+- The notes below compare the workspace and the script before the ML fix.
 
 - **Measurement:**
   - The workspace values come from the Runner's plot: 1024 bins, `plot.dx` and `plot.dy`.
@@ -65,8 +71,8 @@ script in this folder has not been run.
 - **The horizontal spot is larger.** With the source at its true distance, the
   horizontal magnification of the double-Laue focusing is about 0.75 instead of 0.57.
   The horizontal source is large (σx = 137 µm), so the image grows accordingly.
-- **Reflectivity:** both use the internal ML Laue reflectivity, which is too high (see
-  `../BUG_ML.md`).
+- **Reflectivity:** these pre-fix values used the old internal ML Laue reflectivity, which
+  was too high (see `../BUG_ML.md`).
 
 ## Differences from `XRT_BNL_SBDL.py`
 

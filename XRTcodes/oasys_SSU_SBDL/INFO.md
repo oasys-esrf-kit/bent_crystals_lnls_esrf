@@ -37,27 +37,30 @@ Seven widgets in a chain, each sending XRTData to the next:
   - `eMin` and `eMax`, and the two `alignment_energy` fields
   - Rs and Rm
   - the C2 position, 31000 + 50/tan(2θB)
-  - possibly Fcurv; the script's own Fcurv falls from 1.111 to 1.06 over 35–200 keV
+  - possibly Fcurv; after the fixes the script's own Fcurv falls from 0.991 to 0.938 over
+    35–200 keV
 
 ## Results (50 keV)
 
-The generated Runner script was run outside the GUI with 200 000 rays. The 500k-ray
-script in this folder has not been run.
+The generated Runner script was run outside the GUI with 200 000 rays, before and after
+the ML fix. The 500k-ray script in this folder has not been run.
 
-| Quantity | OASYS workspace (Fcurv = 0.985) | Original script (Fcurv = 1.106) |
-|---|---|---|
-| Flux at screen (ph/s) | **4.86×10¹²** | 3.74×10¹² |
-| Horizontal FWHM at screen | 68 µm | 37.5 µm |
-| Vertical FWHM at screen | 13.1 mm | 16.1 mm (not focused vertically) |
-| Energy centroid / peak | 49.990 / 49.990 keV | — |
-| Energy FWHM | not output by the Runner | 0.115 keV |
+| Quantity | Workspace, current code (Fcurv = 0.985) | Script after the fixes (Fcurv = 0.986) | Workspace before the ML fix | Script before the fixes (Fcurv = 1.106) |
+|---|---|---|---|---|
+| Flux at screen (ph/s) | **4.85×10¹²** | 4.95×10¹² | 4.86×10¹² | 3.74×10¹² |
+| Horizontal FWHM at screen | 65 µm | 34 µm | 68 µm | 37.5 µm |
+| Vertical FWHM at screen | 14.3 mm | 12.4 mm | 13.1 mm | 16.1 mm (not focused vertically) |
+| Energy FWHM | not output by the Runner | 89 eV | — | 115 eV |
+
+- **The ML fix does not change this beamline:** both crystals use PP. The workspace and
+  the script after the fixes agree within 2% in flux.
 
 - **Measurement:**
   - The workspace values come from the Runner's plot: 1024 bins, `plot.dx` and `plot.dy`.
   - The script's values come from `fwhm_from_hist` on its own plots.
   - In a direct trace with 200-bin histograms over x = ±0.2 mm, the correct geometry
     gives 46 µm at the screen (34 µm at the focus, 55.95 m).
-- **Flux is about 30% higher than the script's.** The same difference appears when the
+- **Flux is about 30% higher than the script's before the fixes.** The same difference appears when the
   script's own elements are traced with the global beam (intensity 742 vs 554 at
   Fcurv = 1.0 vs the script's geometry; see below).
 - **Reflectivity:** both use the internal PP Laue reflectivity, which is within about

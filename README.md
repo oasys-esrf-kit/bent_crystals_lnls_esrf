@@ -33,8 +33,8 @@ Both issues are **fixed in the code**, and the scans have been rerun
 results, keeps the old ones (`XRTcodes/run_XRT_*/`) for reference, and has a TODO list of
 the decisions still pending for the Bragg+Laue beamlines.
 [XRTcodes/RERUN_RESULTS.md](XRTcodes/RERUN_RESULTS.md) compares old and new results energy
-by energy. The `INFO.md` files of the OASYS workspaces still quote results from before the
-fixes.
+by energy. The OASYS workspaces were rerun with the fixed code; their `INFO.md` files show
+the new and the old results.
 
 - **[XRTcodes/BUG_ML.md](XRTcodes/BUG_ML.md):** the internal multilamellar (ML)
   reflectivity had three bugs, now fixed and checked against XOPPY.

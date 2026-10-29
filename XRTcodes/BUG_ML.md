@@ -97,8 +97,8 @@ flat sagittally (the SSU_BLM Bragg crystal).
 - **Bragg crystals (SSU_BLM, APS_BLM):** the old ML reflectivity ignored absorption. With
   the fix, the Bragg crystal reflects much less. In the rerun, the Bragg and Laue reflection windows no longer
   overlap and the Bragg+Laue flux falls to 10⁻⁴–10⁻³ of the old values (see `RUN_XRT.md`).
-- **The OASYS workspaces** (`oasys_*`) use `bent_crys_2d.py` from OASYS2-XRT. The results
-  quoted in their `INFO.md` were computed before the fix.
+- **The OASYS workspaces** (`oasys_*`) use `bent_crys_2d.py` from OASYS2-XRT. They were
+  rerun with the fix; their `INFO.md` show the results before and after.
 
 ## To do
 

@@ -10,10 +10,12 @@ There are two sets of runs:
 - **Current runs (2026-10-28), in `run_XRT_*_fixed/`:** made after fixing the geometry bug
   in the scripts (`BUG_GEOMETRY.md`) and three bugs in the ML reflectivity of
   `BentCrys2D.py` (`BUG_ML.md`).
-  - **The double-Laue beamlines (SSU_SBDL, BNL_SBDL) give usable results.**
+  - **The double-Laue beamlines (SSU_SBDL, BNL_SBDL) give valid results:** the simulated
+    monochromator works (crystals aligned, focus found), so the numbers can be quoted.
   - **The Bragg+Laue beamlines (SSU_BLM, SSU_BLM_PP, APS_BLM) do not:** the flux falls to
     10⁻⁴–10⁻³ of the old values because the Bragg and Laue reflection windows no longer
     overlap (see [Bragg+Laue beamlines](#bragglaue-beamlines-the-reflection-windows-do-not-overlap)).
+    This is an alignment artefact of the simulation, not a property of the beamlines.
   - Two test runs (`run_XRT_SSU_BLM_test_fc0_rock/`, `run_XRT_APS_BLM_test_fc0_rock/`) show
     what these beamlines give once the windows are aligned. They use changes that are not
     yet in the code; see the [TODO list](#todo-decisions-pending).
@@ -21,7 +23,9 @@ There are two sets of runs:
   [Results before the fixes](#results-before-the-fixes). Their geometry was wrong for all
   four beamlines, and their ML flux was wrong.
 
-The comparison of old and new results, energy by energy, is in `RERUN_RESULTS.md`.
+The comparison of old and new results, energy by energy, is in `RERUN_RESULTS.md`. The OASYS
+workspaces (`oasys_*/INFO.md`) were rerun with the fixed crystal code and agree with the
+scripts after the fixes.
 
 ## How the runs were made
 
@@ -110,8 +114,9 @@ Columns of `res_*_energy.txt`:
 - **BNL_SBDL:**
   - Flux is 0.25× the old value at 30–40 keV and 0.94–1.07× at 50–70 keV. The peak moved
     from 40 to 50 keV.
-  - The geometry fix alone gives about 2× the old flux at 40 keV (`oasys_BNL_SBDL/INFO.md`),
-    so the ML fix accounts for about ×0.12 there. **This large drop is not understood yet.**
+  - The geometry fix alone gives about 2× the old flux at 40 keV, and the ML fix ×0.12: the
+    OASYS workspace, which always had the correct geometry, gives 1.04×10¹³ ph/s before the
+    ML fix and 1.29×10¹² after it (`oasys_BNL_SBDL/INFO.md`). **This large drop is not understood yet.**
   - The horizontal spot is larger than before (0.40–0.46 mm instead of 0.24–0.30 mm). Both
     foci are within 0.3 m of the 56.4 m screen.
   - The M1 mirror still gives a 0.11–0.13 mm vertical spot. Peak flux density 8.1×10¹³
@@ -168,6 +173,65 @@ Results:
 
 `flux/flux0` is mostly the monochromator bandwidth divided by the simulated ±δE band, so
 it is not the crystal reflectivity.
+
+### SSU: double Laue (SBDL) vs Bragg + Laue (BLM)
+
+Both use the same source (3 GeV BM, 6.6 T, 1.6 × 0.66 mrad) and the same 56 m sample
+screen. SSU_SBDL is the run after the fixes; SSU_BLM is the test run (the only working one),
+so its numbers are provisional.
+
+| E (keV) | Flux SBDL | Flux BLM | BLM/SBDL | Flux density BLM/SBDL | ΔE/E SBDL | ΔE/E BLM | z FWHM SBDL | z FWHM BLM |
+|---|---|---|---|---|---|---|---|---|
+| 35 | 2.68e12 | 6.77e10 | 0.03 | 0.4 | 0.17% | 0.05% | 15.9 mm | 0.8 mm |
+| 50 | 4.95e12 | 2.55e11 | 0.05 | 0.6 | 0.18% | 0.08% | 12.4 mm | 0.8 mm |
+| 80 | 1.86e12 | 5.90e11 | 0.32 | 4.5 | 0.55% | 0.03% | 9.6 mm | 0.6 mm |
+| 100 | 6.48e11 | 3.53e11 | 0.54 | 8.0 | 0.98% | 0.12% | 8.5 mm | 0.7 mm |
+| 130 | 1.29e11 | 1.30e11 | 1.01 | 11.7 | 1.74% | 0.30% | 8.4 mm | 0.9 mm |
+| 160 | 2.91e10 | 4.60e10 | 1.58 | 19.1 | 2.59% | 0.48% | 7.3 mm | 0.8 mm |
+| 200 | 4.75e9 | 1.12e10 | 2.36 | 23.6 | 4.27% | 0.80% | 7.1 mm | 0.9 mm |
+
+- **Flux:** SSU_SBDL is higher up to 130 keV (×14–40 at 35–55 keV, ×3 at 80 keV); SSU_BLM
+  is higher above, ×2.4 at 200 keV.
+- **Flux density:** SSU_BLM is higher from 60 keV on (×2.5–25), because its Johann Bragg
+  crystal focuses vertically (0.5–1 mm against 7–16 mm). Horizontal sizes are similar
+  (34–84 µm and 26–60 µm).
+- **The bandwidth does not measure the throughput.** `dE` is the energy spread over the
+  whole beam at the screen. In SSU_SBDL each vertical angle in the 0.66 mrad acceptance
+  selects a different energy, so the spread approaches 0.66 mrad × cot θB (6.7% at 200 keV
+  for Si(111); 4.3% FWHM measured). The flux instead follows the throughput per ray: at
+  200 keV only about 0.05% of the 4.3% band reaches the screen on average for SSU_SBDL,
+  against 0.6% of the 0.8% band for SSU_BLM. So a wider bandwidth with less flux is not a
+  contradiction.
+
+**XOPPY integrated reflectivities.** `XOPPY/integrated_SSU.py` computes with `diff_pat` the
+integrated s-reflectivity of the three SSU crystals, with the radii of the runs at each
+energy (results in `XOPPY/SSU_integrated/integrated_SSU.dat`):
+
+| E (keV) | Bragg Si(311) ML, 10 mm (µrad) | Laue Si(311) PP, 1 mm | Laue Si(111) PP, 1 mm | (L·B)/(L·L) | Flux BLM/SBDL (ray tracing) |
+|---|---|---|---|---|---|
+| 35 | 9.3 | 7.8 | 33.3 | 0.07 | 0.03 |
+| 50 | 18.8 | 20.2 | 62.4 | 0.10 | 0.05 |
+| 65 | 37.2 | 30.3 | 80.4 | 0.17 | 0.18 |
+| 80 | 67.8 | 33.0 | 80.1 | 0.35 | 0.32 |
+| 100 | 128.9 | 29.7 | 67.4 | 0.84 | 0.54 |
+| 120 | 152.4 | 24.3 | 53.3 | 1.31 | 0.85 |
+| 140 | 174.9 | 19.5 | 41.9 | 1.94 | 1.23 |
+| 160 | 194.8 | 15.8 | 33.4 | 2.75 | 1.58 |
+| 180 | 211.6 | 12.9 | 27.1 | 3.72 | 1.95 |
+| 200 | 224.1 | 10.7 | 22.3 | 4.82 | 2.36 |
+
+- The 1 mm Laue crystals lose reflectivity above 65–80 keV (peak from about 0.9 to
+  0.08–0.09 at 200 keV), while the thick bent Bragg crystal keeps a peak near 1 and its
+  integrated reflectivity grows with energy. SSU_SBDL pays the Laue loss twice, SSU_BLM
+  once.
+- The product (L·B)/(L·L) crosses 1 at about 110 keV, the ray tracing at about 130 keV, and
+  they agree within a factor of about 2. The product is only a figure of merit: it ignores
+  how the two reflectivity curves overlap for each ray.
+- XOPPY uses the photoelectric μ. The ray tracing uses xrt's total μ, which lowers the
+  Bragg reflectivity (17 instead of 68 µrad at 80 keV in the internal code), consistent
+  with the ray-tracing ratio being lower above 100 keV.
+- The same ratio in energy units (each integral × cot θB) crosses 1 only at about
+  180 keV and agrees less well with the ray tracing.
 
 ## Per-energy results
 
@@ -689,4 +753,5 @@ Script: `XRT_SSU_BLM_PP.py`, a copy of `XRT_SSU_BLM.py`. Results are in
 4. **BNL_SBDL at 30–40 keV.** Understand the drop to 0.25× the old flux.
 5. **After 1–3:** rerun SSU_BLM, SSU_BLM_PP and APS_BLM (and SSU_SBDL and BNL_SBDL if the
    depth reference changes), update this file, `RERUN_RESULTS.md` and the `INFO.md` of the
-   OASYS workspaces, which still quote results from before the fixes.
+   OASYS workspaces. The Bragg+Laue workspaces (`oasys_SSU_BLM`, `oasys_APS_BLM`) need the
+   same changes as the scripts.

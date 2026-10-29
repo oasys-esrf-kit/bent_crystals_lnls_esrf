@@ -4,6 +4,13 @@ This folder holds an OASYS2 workspace for the SSU_BLM beamline of `XRT_SSU_BLM.p
 energy, 80 keV. The workspace uses OASYS2-XRT widgets only, including two new ones:
 Bending Magnet Light Source and Johann Cylinder Crystal.
 
+> **Status (2026-10-29): with the fixed ML reflectivity this workspace, like the script,
+> transmits almost nothing.** The Bragg and Laue reflection windows no longer overlap: the
+> Laue crystal sits at its nominal angle, and the model uses the crystal mid-plane as the
+> depth reference. See `../RUN_XRT.md` ("Bragg+Laue beamlines") and its TODO list. The
+> workspace needs the same changes as the script (entrance-surface depth reference, Laue
+> pitch offset; +45 µrad at 80 keV in the test run).
+
 ## Files
 
 | File | Content |
@@ -40,17 +47,21 @@ Six widgets in a chain, each sending XRTData to the next:
 
 ## Results (80 keV)
 
-The generated Runner script was run outside the GUI with 100 000 rays. The 500k-ray
-script in this folder has not been run.
+The generated Runner script was run outside the GUI, with 200 000 rays after the ML fix and
+100 000 rays before it. The 500k-ray script in this folder has not been run.
 
-| Quantity | OASYS workspace (Fcurv = 1.0) | Original script (Fcurv = 1.1175) |
-|---|---|---|
-| Flux at screen (ph/s) | 3.38×10¹² | 3.38×10¹² |
-| Horizontal FWHM at screen | 52 µm | 34 µm |
-| Vertical FWHM at screen | 3.4 mm | 3.9 mm |
-| Energy centroid / peak | 80.022 / 80.029 keV | — |
-| Energy FWHM | not output by the Runner | 0.163 keV |
-| Horizontal focus | at the screen (56.00 m) | 56.008 m |
+| Quantity | Workspace, current code | Script after the fixes | Script test run (entrance ref. + Laue rocking) | Workspace before the ML fix | Script before the fixes (Fcurv = 1.1175) |
+|---|---|---|---|---|---|
+| Flux at screen (ph/s) | **1.47×10⁹** | 1.37×10⁹ | 5.90×10¹¹ | 3.38×10¹² | 3.38×10¹² |
+| Horizontal FWHM at screen | 161 µm | 396 µm | 42 µm | 52 µm | 34 µm |
+| Vertical FWHM at screen | 2.3 mm | 6.7 mm | 0.6 mm | 3.4 mm | 3.9 mm |
+
+- **Current code:** the workspace agrees with the script after the fixes: about 10⁻³ of
+  the old flux. Sizes come from a few rays and are not meaningful.
+- **The test run** shows what this beamline gives once the crystals are aligned. It needs
+  changes that are not yet in the code or the widgets.
+- **Before the ML fix** the workspace and the script agreed in flux, and the workspace
+  already had the correct geometry; the columns below refer to that state.
 
 - **How the sizes are measured differs.**
   - The workspace values come from the Runner's plot: 1024 bins, `plot.dx` and `plot.dy`.
@@ -60,8 +71,8 @@ script in this folder has not been run.
   (global-beam) geometry at 80 keV with 200k rays, the horizontal FWHM is 40 µm and the
   vertical 2.9 mm (see `../BUG_GEOMETRY.md`).
 - **Flux** agrees with the script within statistics.
-- **Reflectivity:** both use the internal ML Laue reflectivity, which is too high (see
-  `../BUG_ML.md`).
+- **Reflectivity:** these pre-fix values used the old internal ML reflectivity: Laue too
+  high, Bragg without absorption (see `../BUG_ML.md`).
 
 ## Differences from `XRT_SSU_BLM.py`
 

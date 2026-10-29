@@ -24,16 +24,19 @@ The old results are in `run_XRT_<name>/`. Each folder has `res_*_energy.txt`, `r
 
 ## Summary
 
-- **Double-Laue beamlines (SSU_SBDL, BNL_SBDL): the results are usable.**
+- **Double-Laue beamlines (SSU_SBDL, BNL_SBDL): the results are valid** (the simulated
+  monochromator works: crystals aligned, focus found).
   - SSU_SBDL (PP): flux ×1.16–1.52 the old value, Fcurv 0.94–0.99 (was 1.05–1.11),
     horizontal focus at 55.6–56.3 m for a 56 m screen. Horizontal FWHM is similar
     (34–84 µm); the energy bandwidth is 15–36% smaller above 50 keV.
   - BNL_SBDL (ML): flux ×0.25 at 30–40 keV and ×0.94–1.07 at 50–70 keV. Fcurv 1.005–1.03
-    (was 1.18–1.20). Horizontal FWHM 0.40–0.46 mm (was 0.24–0.30 mm). The large drop at
-    30–40 keV was not investigated: the geometry fix alone gave ×2 at 40 keV
-    (`oasys_BNL_SBDL/INFO.md`), so the ML fix accounts for about ×0.12 there.
-- **Bragg+Laue beamlines (SSU_BLM, SSU_BLM_PP, APS_BLM): the scripts' results are not
-  usable.**
+    (was 1.18–1.20). Horizontal FWHM 0.40–0.46 mm (was 0.24–0.30 mm). At 40 keV the
+    geometry fix gives ×2 and the ML fix ×0.12 (the OASYS workspace, with the correct
+    geometry, goes from 1.04×10¹³ to 1.29×10¹² ph/s). Why the ML fix has such a large
+    effect at 30–40 keV is not understood yet.
+- **Bragg+Laue beamlines (SSU_BLM, SSU_BLM_PP, APS_BLM): the scripts' results are
+  invalid.** This is an alignment artefact of the simulation, not a property of the
+  beamlines.
   - Flux drops to 10⁻⁴–10⁻³ of the old values. Sizes and bandwidths are meaningless
     (horizontal FWHM up to 0.4 mm, Fcurv stuck at the edge of the search range at low E for
     SSU_BLM).
@@ -75,6 +78,28 @@ Results:
   internal code gives 71 µrad (`BUG_ML.md`).
 - **The double-Laue beamlines depend only weakly on the depth reference:** at one energy
   each, fc = 0 changed the intensity by −20% (SSU_SBDL) and +4% (BNL_SBDL).
+
+## OASYS workspaces
+
+The four Runner scripts (`oasys_*/*_runner_script.py`) were rerun with 200 000 rays and the
+fixed `bent_crys_2d.py` of OASYS2-XRT. They agree with the scripts after the fixes:
+
+| Workspace | Flux, workspace (ph/s) | Flux, script after the fixes | Flux, workspace before the ML fix |
+|---|---|---|---|
+| SSU_SBDL, 50 keV | 4.85×10¹² | 4.95×10¹² | 4.86×10¹² |
+| BNL_SBDL, 40 keV | 1.29×10¹² | 1.30×10¹² | 1.04×10¹³ |
+| SSU_BLM, 80 keV | 1.47×10⁹ | 1.37×10⁹ | 3.38×10¹² |
+| APS_BLM, 44 keV | 1.20×10⁸ | 1.20×10⁸ | 1.09×10¹² |
+
+- SSU_SBDL uses PP only, so the ML fix does not change it.
+- The Bragg+Laue workspaces fail like the scripts and need the same changes. Details in each
+  `INFO.md`.
+
+## SSU_SBDL vs SSU_BLM
+
+The comparison of the two SSU options (flux, flux density, bandwidth, vertical size) and the
+XOPPY integrated reflectivities that explain why SSU_BLM wins above about 130 keV are in
+`RUN_XRT.md`, section "SSU: double Laue (SBDL) vs Bragg + Laue (BLM)".
 
 ## Open decisions
 
