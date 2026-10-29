@@ -59,7 +59,7 @@
 
 % ---------------------------------------------------------------
 \begin{frame}{What was done}
-  \small
+  \footnotesize
   \begin{columns}[T]
     \begin{column}{0.5\textwidth}
       \textbf{Software}
@@ -85,6 +85,11 @@
       \end{itemize}
     \end{column}
   \end{columns}
+
+  \vspace{0.2em}
+  \centering
+  \includegraphics[width=0.9\textwidth,trim={340 175 70 205},clip]{figures/oasys_xrt.png}\\
+  \scriptsize OASYS2 workspace for SSU\_BLM at 80 keV (\texttt{oasys\_SSU\_BLM/SSU\_BLM\_80keV.ows})
 \end{frame}
 
 % ---------------------------------------------------------------
@@ -397,8 +402,7 @@
     \toprule
     Component & Status \\
     \midrule
-    \texttt{S4Crystal} (SHADOW4) & Perfect crystals, Bragg only (\texttt{BraggDiffraction} hard-coded;
-      Laue ``to be developed''); plane, conic, toroid, mesh surfaces \\
+    \texttt{S4Crystal} (SHADOW4) & Perfect crystals, Bragg only; plane, conic, toroid, mesh surfaces \\
     \texttt{S4MosaicCrystal} & Separate family of crystal classes: template for a new one \\
     crystalpy & Perfect-crystal amplitudes (Zachariasen, Guigay) for \texttt{BraggDiffraction},
       \texttt{LaueDiffraction}, \texttt{LaueTransmission}; susceptibilities from xraylib,
