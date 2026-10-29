@@ -6,7 +6,10 @@ effectively sit 10 m farther from the source than intended. The Fcurv optimizati
 this by weakening the sagittal curvature, which is why Fcurv came out above 1 in every
 run.
 
-The scripts are **not corrected yet**.
+The bug is **fixed** in the five scripts (`XRT_SSU_BLM.py`, `XRT_SSU_BLM_PP.py`,
+`XRT_APS_BLM.py`, `XRT_SSU_SBDL.py`, `XRT_BNL_SBDL.py`). The results in `run_XRT_*` and
+`RUN_XRT.md` were computed before the fix. The scans have been rerun with the fix
+(`run_XRT_*_fixed/`); see `RERUN_RESULTS.md` and `RUN_XRT.md`.
 
 ## The bug
 
@@ -126,8 +129,24 @@ beamBraggGlobal, beamBraggLocal = beamLine.Bragg.reflect(beam=rs.Beam(copyFrom=b
 - Alternatively, use `propagate(beamSource, needNewGlobal=True)` and use its global
   output.
 
-## To do after the fix
+## Check of the fix
 
-1. Fix the four scripts.
-2. Rerun them. Fcurv is expected to come out close to 1.
-3. Update `RUN_XRT.md`.
+The scripts' own `run_process` was run at one energy each (100k rays), including the broad
+Fcurv search:
+
+| Script | Fcurv found (before the fix) | Horizontal focus (script caustic) | Screen |
+|---|---|---|---|
+| SSU_BLM, 80 keV | 1.0001 (1.1175) | 54.80 m | 56.0 m |
+| SSU_SBDL, 50 keV | 0.986 (1.106) | 55.95 m | 56.0 m |
+
+- The optimizer now finds Fcurv ≈ 1, as expected with the analytic radii.
+- For SSU_BLM the script's FWHM caustic puts the narrowest point at 54.8 m, with 15 µm
+  FWHM. A direct trace with Fcurv = 1.0 gave the minimum rms width at 56.0 m. This
+  suggests a narrow core focusing slightly upstream of broader wings; it was not
+  investigated further.
+- APS_BLM and BNL_SBDL were not rerun after the fix.
+
+## To do
+
+Done: full energy scans rerun and `RUN_XRT.md` updated. The remaining open points are in
+the TODO list of `RUN_XRT.md`.

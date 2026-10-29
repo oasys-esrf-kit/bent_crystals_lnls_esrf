@@ -1,0 +1,30 @@
+--- BentCrys2D.py
++++ test_fc0_rock/BentCrys2D.py
+@@ -149,8 +149,9 @@
+             # eta_out - eta_in = -beta*t
+             #
+             pp_delta_total = -beta * t
+-            pp_in = center - 0.5 * pp_delta_total
+-            pp_out = center + 0.5 * pp_delta_total
++            fc = self.PP_center_fraction
++            pp_in = center - fc * pp_delta_total
++            pp_out = pp_in + pp_delta_total
+             # ------------------------------------------------------------
+             # ML: determine discrete lamella spacing
+             # ------------------------------------------------------------
+@@ -185,11 +186,11 @@
+             # ------------------------------------------------------------
+             # ML lamella centers
+             # ------------------------------------------------------------
+-            ml_first_center = (center - 0.5 * (nslab - 1) * ml_step)
+-            ml_last_center = (center + 0.5 * (nslab - 1) * ml_step)
++            ml_first_center = (center - fc * (nslab - 1) * ml_step)
++            ml_last_center = (ml_first_center + (nslab - 1) * ml_step)
+             # Geometrical boundaries surrounding the discrete lamella centers.
+-            ml_boundary_in = (center - 0.5 * nslab * ml_step)
+-            ml_boundary_out = (center + 0.5 * nslab * ml_step)
++            ml_boundary_in = (ml_first_center - 0.5 * ml_step)
++            ml_boundary_out = (ml_boundary_in + nslab * ml_step)
+ 
+             return {
+                 "center": center,

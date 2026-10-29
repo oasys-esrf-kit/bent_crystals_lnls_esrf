@@ -1,84 +1,107 @@
-# Bug: internal ML reflectivity too high for Laue crystals
+# Bug: internal ML reflectivity (fixed)
 
-The multilamellar (ML) reflectivity in `bentSi_Crys.get_amplitude` is too high for Laue
-crystals. The cause is one missing line in the Laue branch of `ml_pol`. A second
-difference from the Fortran reference (4× more lamellae) adds a smaller error. With both
-changed, the internal ML matches XOPPY's ML within 2.4% in both test cases.
+The multilamellar (ML) reflectivity in `bentSi_Crys.get_amplitude` had three bugs. In the
+Laue case it was too high: its integrated reflectivity was 1.43× XOPPY's for the SSU_BLM
+crystal at 80 keV. In the Bragg case absorption had no effect.
 
-The code is **not corrected yet**. The fixes below were tested on scratch copies only.
-
-Reference: `crystal3.f90`, `CRYSTAL_BENT_ML`, in https://github.com/srio/CRYSTAL (used by
-XOPPY `diff_pat`, MOSAIC=2).
-
-Both copies of the code are affected:
+The three bugs are **fixed** in both copies of the code:
 
 - `XRTcodes/BentCrys2D.py`
 - `OASYS2-XRT/orangecontrib/xrt/util/bent_crys_2d.py`
 
-## 1. Missing transmission update in the Laue branch (main cause)
+The scans have been rerun with the fixes (`run_XRT_*_fixed/`; see `RERUN_RESULTS.md` and
+`RUN_XRT.md`). The Bragg+Laue beamlines now need a decision on the depth reference and the
+alignment of the second crystal.
+
+Reference: `crystal3.f90`, `CRYSTAL_BENT_ML`, in https://github.com/srio/CRYSTAL (used by
+XOPPY `diff_pat`, MOSAIC=2).
+
+## 1. Missing transmission update in the Laue branch
 
 - In `crystal3.f90`, `tsmall_old = tsmall` runs after both the Bragg and the Laue
-  branches. This makes `prodt` the product of the transmissions of the lamellae in
-  front, so each lamella only sees what is left of the incident beam.
-- The Python Bragg branch has this line (`BentCrys2D.py:523`), but the Laue branch does
-  not. In Laue, `prodt` therefore stays at 1 and every lamella reflects the full beam.
-- The incoherent sum then goes above 1, and `np.clip(Rtot, 0.0, 1.0)` hides this by
-  capping at 1.
-- The fix is one line after `Rtot += rsmall * prodt * att` in the Laue branch:
+  branches. This makes `prodt` the product of the transmissions of the lamellae in front.
+- The Python Laue branch did not have this line, so `prodt` stayed at 1 and every lamella
+  reflected the full incident beam.
+- The sum then exceeded 1, and `np.clip` capped it.
+- **Fix:** `tsmall_old = tsmall` after `Rtot += rsmall * prodt * att` in the Laue branch.
 
-  ```python
-  tsmall_old = tsmall
-  ```
+## 2. `ML_refinement=4`
 
-## 2. `ML_refinement=4` (smaller effect)
+- Fortran uses the lamella step Δy = π/2 (Laue) or 2 (Bragg). Python used 4× more
+  lamellae.
+- ML sums the lamellae incoherently, so a finer subdivision changes the result instead of
+  converging. The step is part of the model.
+- **Fix:** `ML_refinement=1` in both calls to `build_deviation_reference`.
 
-- Fortran uses the step Δy = π/2 between lamellae for Laue (2 for Bragg). For the
-  SSU_BLM Laue crystal at 80 keV that gives 47 lamellae of 21 µm.
-- Python multiplies the number of lamellae by 4 (`BentCrys2D.py:359-360`,
-  `ML_refinement=4`), giving a step of π/8.
-- The ML model sums lamellae incoherently, so it is not a discretization that converges
-  as the lamellae get thinner. The π/2 step is part of the model's definition, and 4×
-  thinner lamellae change the answer.
-- Setting `ML_refinement=1` matches Fortran.
+## 3. Sign convention of the susceptibilities
+
+- xrt returns Ψ₀, Ψ_H and Ψ_H̄ as the complex conjugates of the values the ML formulas
+  expect, which `crystal3.f90` and XOPPY use. At 80 keV for Si(311):
+  - xrt: Ψ₀ = −1.507e−7 **+** 1.29e−10 i
+  - XOPPY: Ψ₀ = −1.506e−7 **−** 2.92e−11 i
+- **Effect:**
+  - Absorption turned into gain in the lamella transmission. `tsmall` came out above 1 (up
+    to 1.05) for off-Bragg lamellae.
+  - In a thick Bragg crystal the product over about 200 lamellae reached about 10⁴. That
+    cancelled the exit attenuation, so the reflectivity stayed at about 1 over the whole
+    bending range, independently of absorption.
+- **Fix:** in `ml_pol`, use `np.conj(PsiH)`, `np.conj(PsiH_)` and `np.conj(Psi0).imag`
+  for `qsmall` and `g`.
+
+## Remaining difference: the absorption coefficient (a modelling choice)
+
+- **The two values:**
+  - The internal code takes μ from xrt (`get_absorption_coefficient`, from Im n): 0.521 cm⁻¹
+    for Si at 80 keV.
+  - XOPPY uses 0.118 cm⁻¹ (photoelectric only).
+  - xrt's value presumably includes incoherent (Compton) scattering, which is large at
+    these energies.
+- **The internal code is unchanged here: it uses xrt's μ.**
+- **Check:** with all three fixes and μ (and Im Ψ₀) scaled to XOPPY's value (a test only),
+  the internal ML reproduces XOPPY. See the "+ XOPPY μ" column below.
 
 ## Test: integrated s-reflectivity at 80 keV (µrad)
 
-Si(311) Laue, asymmetry 20.98°, t = 1 mm, compliance tensor
-`/home/srio/Oasys2/S_tensor.txt`. The internal code is called as in
-`XOPPY/comparison_SSU_BLM.py` with `method='ML'` and `ML_sign=-1`.
+Si(311), compliance tensor `/home/srio/Oasys2/S_tensor.txt`. Laue crystal: asymmetry
+20.98°, t = 1 mm, `ML_sign` −1. Bragg crystal: symmetric, t = 10 mm, Rm = 647668 mm,
+flat sagittally (the SSU_BLM Bragg crystal).
 
-| | SSU_BLM radii (Rm = −76039 mm, Rs = 1217.6 mm) | Rm = 1000 mm, Rs = 1e6 mm |
-|---|---|---|
-| XOPPY ML (reference) | 34.02 | 62.85 |
-| internal ML, current code | 48.77 (+43%, capped at 1) | 60.12 (−4%) |
-| + `tsmall_old` fix | 37.09 (+9%) | 63.63 (+1%) |
-| + `ML_refinement=1` | 44.79 (still capped) | 60.89 |
-| both fixes | **34.82 (+2.4%)**, peak 0.86 | **64.37 (+2.4%)** |
+| Case | XOPPY ML | Before the fixes | Fixes 1+2 | Fixes 1+2+3 (current code) | Fixes 1+2+3 + XOPPY μ (test) |
+|---|---|---|---|---|---|
+| Laue, SSU_BLM radii (Rm = −76039 mm, Rs = 1217.6 mm) | 34.02 | 48.77 (capped at 1) | 34.82 | **30.42** | 34.04 |
+| Laue, Rm = 1000 mm, Rs = 1e6 mm | 62.85 | 60.12 | 64.37 | **56.35** | 63.17 |
+| Bragg, SSU_BLM | 67.45 | 315 (R ≈ 1 over 330 µrad) | 309 | **17.1** | 71.4 |
 
-- **Why the low-reflectivity case looked fine:** its peak reflectivity is only about
-  0.02, so beam depletion barely matters. That case hid the bug. It only shows up when
-  the reflectivity is high.
-- **Bragg crystals:** the Bragg branch already has the transmission update. But
-  `ML_refinement=4` also applies to Bragg crystals (SSU_BLM, APS_BLM), so their
-  reflectivity probably changes too. This has not been checked against XOPPY.
-- **XOPPY radii sign:** XOPPY ML runs the Rm = 1000 mm case with positive radii, and gives
-  −2899 lamellae and a zero profile with negative radii. For the SSU_BLM radii it is the
-  other way round. The ML step sign follows the strain gradient: with the wrong sign the
-  lamella count goes negative and the profile is zero.
+- **Laue (current code):** about 11% below XOPPY, the same as the internal PP (30.05 and
+  58.65 µrad). The internal PP/ML ratio is now 0.988, against XOPPY's 0.969; before the
+  fixes it was 0.616.
+- **Bragg (current code):**
+  - 17 µrad, against 67 µrad for XOPPY.
+  - The thick bent Bragg crystal is limited by absorption with depth, so its integrated
+    reflectivity scales roughly as 1/μ. This is why the choice of μ matters much more for
+    Bragg than for Laue.
+- **Profile position:**
+  - The internal profiles are centred on the crystal mid-plane, while XOPPY's start at
+    the entrance surface.
+  - `PP_center_fraction` is not used.
+  - This shifts the profiles but not the integrals.
+- **XOPPY radii sign:** XOPPY ML needs radii of the sign that makes the strain gradient
+  positive. Otherwise it gives a negative number of lamellae and a zero profile.
 
 ## Consequences for the runs
 
-- All beamlines traced with ML are affected: SSU_BLM, APS_BLM and BNL_SBDL. SSU_SBDL uses
-  PP.
-- For SSU_BLM the ML flux is about 1.6× too high at 80 keV and 2.3× too high at 35 keV.
-  See "Laue reflectivity check: PP vs ML" in `RUN_XRT.md`.
-- The Fcurv optimization traces with ML in every script. Its result (the focus position)
-  depends on geometry, not on the reflectivity magnitude, so it should be largely
-  unaffected.
+- **The flux of every beamline traced with ML is affected:** SSU_BLM, APS_BLM and
+  BNL_SBDL. SSU_SBDL uses PP for its Laue crystals and has no Bragg crystal.
+- **Laue crystals:** the old ML flux was too high, by about 1.6× at 80 keV for SSU_BLM
+  (see "Laue reflectivity check" in `RUN_XRT.md`).
+- **Bragg crystals (SSU_BLM, APS_BLM):** the old ML reflectivity ignored absorption. With
+  the fix, the Bragg crystal reflects much less. In the rerun, the Bragg and Laue reflection windows no longer
+  overlap and the Bragg+Laue flux falls to 10⁻⁴–10⁻³ of the old values (see `RUN_XRT.md`).
+- **The OASYS workspaces** (`oasys_*`) use `bent_crys_2d.py` from OASYS2-XRT. The results
+  quoted in their `INFO.md` were computed before the fix.
 
-## To do after the fix
+## To do
 
-1. Apply both fixes to the two copies of the code.
-2. Rerun `XOPPY/comparison.py` and `XOPPY/comparison_SSU_BLM.py`.
-3. Check a Bragg ML case against XOPPY.
-4. Rerun SSU_BLM, APS_BLM and BNL_SBDL, and update `RUN_XRT.md`.
+1. Decide which absorption coefficient to use: xrt total (current) or photoelectric
+   (as XOPPY).
+2. Done: scripts rerun and `RUN_XRT.md` updated. See the TODO list there for what remains.

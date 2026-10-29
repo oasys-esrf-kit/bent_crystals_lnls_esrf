@@ -505,9 +505,10 @@ def run_process(beamLine):
     # Source -> mask -> Bragg
     # ==============================================================
     beamSource = (beamLine.source.shine())
+    # propagate() and expose() return local beams: downstream elements get the global beam
     beamMask1 = (beamLine.mask1.propagate(beamSource))
-    beamSCR1 = (beamLine.screen1.expose(beamMask1))
-    beamBraggGlobal, beamBraggLocal = (beamLine.Bragg.reflect(beam=rs.Beam(copyFrom=beamMask1)))
+    beamSCR1 = (beamLine.screen1.expose(beamSource))
+    beamBraggGlobal, beamBraggLocal = (beamLine.Bragg.reflect(beam=rs.Beam(copyFrom=beamSource)))
     # ==============================================================
     # Function to copy a beam subset
     # ==============================================================

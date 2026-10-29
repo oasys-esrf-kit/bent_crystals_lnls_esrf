@@ -1,0 +1,337 @@
+START Wed Oct 28 05:27:37 PM CET 2026
+aL 35.264389682754654
+pol 0.062193397743432674
+The last 10 runs
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/ows_test/ssu_blm_80keV_test_F1.py::
+start: Wed, 28 Oct 2026 14:44:54; stop: 14:45:03; duration: 9.4 s
+/usr/lib/python3.12/inspect.py::
+start: Wed, 28 Oct 2026 14:51:55; stop: 14:52:48; duration: 53.7 s
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/oasys_SSU_BLM/script_oasys.py::
+start: Wed, 28 Oct 2026 14:59:14; stop: 15:00:08; duration: 53.7 s
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/bnl_run/bnl_test.py::
+start: Wed, 28 Oct 2026 15:22:20; stop: 15:22:27; duration: 6.5 s
+/usr/lib/python3.12/inspect.py::
+start: Wed, 28 Oct 2026 15:25:10; stop: 15:25:28; duration: 17.5 s
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/aps_run/aps_test.py::
+start: Wed, 28 Oct 2026 15:32:12; stop: 15:32:27; duration: 15.1 s
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/sbdl_run/sbdl_test.py::
+start: Wed, 28 Oct 2026 15:35:01; stop: 15:35:06; duration: 4.5 s
+/usr/lib/python3.12/inspect.py::
+start: Wed, 28 Oct 2026 16:28:54; stop: 16:29:49; duration: 54.3 s
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/run_XRT_SSU_SBDL_fixed/../XRT_SSU_SBDL.py::
+start: Wed, 28 Oct 2026 16:59:00; stop: 17:22:41; duration: 1421.7 s
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/run_XRT_APS_BLM_fixed/../XRT_APS_BLM.py::
+start: Wed, 28 Oct 2026 17:22:43; stop: 17:27:37; duration: 293.6 s
+energy 30000.0 eV, 1 of 5
+pitch 0.002000285714285714
+yafterM1 65.20931428571427
+The job is running... 
+397376 rays of 500000
+795174 rays of 500000
+
+FILTER TRANSMISSION
+before filters : 5.00000000e+05
+after diamond  : 4.16708795e+05   T_D=8.334176e-01
+after SiC      : 7.97616674e+04   T_SiC=1.914086e-01
+total filters  : T=1.595233e-01
+
+Broad Fcurv optimization...
+
+Broad Fcurv result: 1.020000000
+Fine Fcurv search: 1.005000000 to 1.035000000
+F=1.010000  focus=56020.0 mm  offset=-380.0 mm  FWHM=0.2440 mm
+F=1.015000  focus=56340.0 mm  offset=-60.0 mm  FWHM=0.2040 mm
+F=1.020000  focus=55925.0 mm  offset=-475.0 mm  FWHM=0.1240 mm
+F=1.025000  focus=56605.0 mm  offset=205.0 mm  FWHM=0.2480 mm
+F=1.030000  focus=56430.0 mm  offset=30.0 mm  FWHM=0.1900 mm
+
+Final horizontal Fcurv: 1.030000000
+Reduced-beam horizontal focus: 56430.000 mm
+Reduced-beam focus residual: 30.000 mm
+Horizontal FWHM at waist: 1.900000e-01 mm
+Optimized double-Laue correction: Fcurv=1.030000000
+R/R0=0.950  R=11008159.925 mm  focus=54300.0 mm  offset=-2100.0 mm  FWHM=0.0800 mm
+R/R0=1.000  R=11587536.763 mm  focus=55475.0 mm  offset=-925.0 mm  FWHM=0.0800 mm
+R/R0=1.050  R=12166913.601 mm  focus=56305.0 mm  offset=-95.0 mm  FWHM=0.0860 mm
+R/R0=1.100  R=12746290.439 mm  focus=57485.0 mm  offset=1085.0 mm  FWHM=0.0860 mm
+R/R0=1.150  R=13325667.278 mm  focus=58320.0 mm  offset=1920.0 mm  FWHM=0.1020 mm
+R/R0=1.200  R=13905044.116 mm  focus=58395.0 mm  offset=1995.0 mm  FWHM=0.1740 mm
+R/R0=1.250  R=14484420.954 mm  focus=58265.0 mm  offset=1865.0 mm  FWHM=0.3200 mm
+C1: Iin=7.97616674e+04, Iout=6.99987098e+03, T=8.77598376e-02
+C2: Iin=6.99987098e+03, Iout=1.20419825e+03, T=1.72031493e-01
+Double transmission = 0.0151
+
+FINAL BEAM WIDTHS FROM RAYS
+x FWHM : 4.628669e-01 mm
+z FWHM : 1.067187e-01 mm
+x' FWHM: 1.351695e+00 mrad
+z' FWHM: 6.578614e-02 mrad
+
+Calculating broad horizontal caustic...
+Broad horizontal focus: 56500.000 mm FWHM: 3.920000e-01 mm
+
+Calculating broad vertical caustic...
+Broad vertical focus: 56500.000 mm offset: 100.000 mm FWHM: 9.000000e-02 mm
+
+CAUSTIC RESULTS
+Horizontal focus: 56592.000000 mm
+Horizontal focus offset: 192.000 mm
+Minimum horizontal FWHM: 3.020000e-01 mm
+Vertical focus: 56714.000000 mm
+Vertical focus offset: 314.000 mm
+Minimum vertical FWHM: 8.000000e-02 mm
+Alarm! M1 absorbes 31.70% of rays or 29.74% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.69% of rays or 29.73% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.68% of rays or 29.72% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.66% of rays or 29.70% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.65% of rays or 29.69% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.64% of rays or 29.68% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.64% of rays or 29.67% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.68% of rays or 29.72% of flux at 0% alarm level!
+1 calculation step took 155.6 s
+30000.000000	1.12996558e+15	9.35793004e+11	1.76823674e+13	4.62866904e-01	1.06718748e-01	1.35169518e+00	6.57861429e-02	1.67094577e-02	2100.911132	67560.583848
+
+energy 40000.0 eV, 2 of 5
+pitch 0.0017488571428571423
+yafterM1 57.01274285714284
+345589 rays of 500000
+690863 rays of 500000
+
+FILTER TRANSMISSION
+before filters : 5.00000000e+05
+after diamond  : 4.30998697e+05   T_D=8.619974e-01
+after SiC      : 1.83798068e+05   T_SiC=4.264469e-01
+total filters  : T=3.675961e-01
+
+Previous-energy Fcurv: 1.030000000
+Fine Fcurv search: 1.015000000 to 1.045000000
+F=1.009437  focus=56090.0 mm  offset=-310.0 mm  FWHM=0.2500 mm
+F=1.014438  focus=56225.0 mm  offset=-175.0 mm  FWHM=0.2480 mm
+F=1.019437  focus=56440.0 mm  offset=40.0 mm  FWHM=0.2280 mm
+F=1.024437  focus=56615.0 mm  offset=215.0 mm  FWHM=0.2660 mm
+F=1.029438  focus=57005.0 mm  offset=605.0 mm  FWHM=0.2460 mm
+
+Final horizontal Fcurv: 1.019437500
+Reduced-beam horizontal focus: 56440.000 mm
+Reduced-beam focus residual: 40.000 mm
+Horizontal FWHM at waist: 2.280000e-01 mm
+Optimized double-Laue correction: Fcurv=1.019437500
+R/R0=0.950  R=12590772.019 mm  focus=54750.0 mm  offset=-1650.0 mm  FWHM=0.0760 mm
+R/R0=1.000  R=13253444.230 mm  focus=55770.0 mm  offset=-630.0 mm  FWHM=0.0820 mm
+R/R0=1.050  R=13916116.442 mm  focus=56510.0 mm  offset=110.0 mm  FWHM=0.0860 mm
+R/R0=1.100  R=14578788.653 mm  focus=57845.0 mm  offset=1445.0 mm  FWHM=0.0920 mm
+R/R0=1.150  R=15241460.865 mm  focus=58395.0 mm  offset=1995.0 mm  FWHM=0.1040 mm
+R/R0=1.200  R=15904133.076 mm  focus=58390.0 mm  offset=1990.0 mm  FWHM=0.1780 mm
+R/R0=1.250  R=16566805.288 mm  focus=58360.0 mm  offset=1960.0 mm  FWHM=0.2880 mm
+C1: Iin=1.83798068e+05, Iout=2.18864062e+04, T=1.19078544e-01
+C2: Iin=2.18864062e+04, Iout=3.76184664e+03, T=1.71880509e-01
+Double transmission = 0.0205
+
+FINAL BEAM WIDTHS FROM RAYS
+x FWHM : 4.401266e-01 mm
+z FWHM : 1.084672e-01 mm
+x' FWHM: 1.131123e+00 mrad
+z' FWHM: 6.700118e-02 mrad
+Horizontal focus near fine-scan boundary; expanding caustic.
+
+CAUSTIC RESULTS
+Horizontal focus: 56350.000000 mm
+Horizontal focus offset: -50.000 mm
+Minimum horizontal FWHM: 3.220000e-01 mm
+Vertical focus: 56520.000000 mm
+Vertical focus offset: 120.000 mm
+Minimum vertical FWHM: 8.600000e-02 mm
+Alarm! M1 absorbes 31.43% of rays or 30.37% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.41% of rays or 30.36% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.40% of rays or 30.34% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.39% of rays or 30.34% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.38% of rays or 30.33% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.37% of rays or 30.31% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.37% of rays or 30.31% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.40% of rays or 30.34% of flux at 0% alarm level!
+2 calculation steps took 313.0 s
+40000.000000	4.98579170e+14	1.29788426e+12	2.82201021e+13	4.40126585e-01	1.08467170e-01	1.13112343e+00	6.70011791e-02	3.45339357e-02	1575.683131	50670.430894
+
+energy 50000.0 eV, 3 of 5
+pitch 0.0015217142857142844
+yafterM1 49.60788571428567
+305399 rays of 500000
+610127 rays of 500000
+
+FILTER TRANSMISSION
+before filters : 5.00000000e+05
+after diamond  : 4.37462104e+05   T_D=8.749242e-01
+after SiC      : 2.49989750e+05   T_SiC=5.714546e-01
+total filters  : T=4.999795e-01
+
+Previous-energy Fcurv: 1.019437500
+Fine Fcurv search: 1.004437500 to 1.034437500
+F=1.009437  focus=56420.0 mm  offset=20.0 mm  FWHM=0.2740 mm
+F=1.014438  focus=56710.0 mm  offset=310.0 mm  FWHM=0.2720 mm
+F=1.019437  focus=56825.0 mm  offset=425.0 mm  FWHM=0.2740 mm
+F=1.024437  focus=56675.0 mm  offset=275.0 mm  FWHM=0.2800 mm
+F=1.029438  focus=57690.0 mm  offset=1290.0 mm  FWHM=0.2580 mm
+
+Final horizontal Fcurv: 1.009437500
+Reduced-beam horizontal focus: 56420.000 mm
+Reduced-beam focus residual: 20.000 mm
+Horizontal FWHM at waist: 2.740000e-01 mm
+Optimized double-Laue correction: Fcurv=1.009437500
+R/R0=0.950  R=14470166.351 mm  focus=54435.0 mm  offset=-1965.0 mm  FWHM=0.0860 mm
+R/R0=1.000  R=15231754.053 mm  focus=55475.0 mm  offset=-925.0 mm  FWHM=0.0900 mm
+R/R0=1.050  R=15993341.756 mm  focus=56500.0 mm  offset=100.0 mm  FWHM=0.0960 mm
+R/R0=1.100  R=16754929.459 mm  focus=57515.0 mm  offset=1115.0 mm  FWHM=0.1060 mm
+R/R0=1.150  R=17516517.162 mm  focus=58200.0 mm  offset=1800.0 mm  FWHM=0.1160 mm
+R/R0=1.200  R=18278104.864 mm  focus=58325.0 mm  offset=1925.0 mm  FWHM=0.1780 mm
+R/R0=1.250  R=19039692.567 mm  focus=58320.0 mm  offset=1920.0 mm  FWHM=0.2720 mm
+C1: Iin=2.49989750e+05, Iout=6.50592355e+04, T=2.60247612e-01
+C2: Iin=6.50592355e+04, Iout=2.78182879e+04, T=4.27583996e-01
+Double transmission = 0.1113
+
+FINAL BEAM WIDTHS FROM RAYS
+x FWHM : 4.421822e-01 mm
+z FWHM : 1.123381e-01 mm
+x' FWHM: 9.473724e-01 mrad
+z' FWHM: 6.793904e-02 mrad
+
+CAUSTIC RESULTS
+Horizontal focus: 56223.000000 mm
+Horizontal focus offset: -177.000 mm
+Minimum horizontal FWHM: 3.380000e-01 mm
+Vertical focus: 56496.000000 mm
+Vertical focus offset: 96.000 mm
+Minimum vertical FWHM: 9.400000e-02 mm
+Alarm! M1 absorbes 31.83% of rays or 30.49% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.81% of rays or 30.47% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.80% of rays or 30.46% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.79% of rays or 30.45% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.78% of rays or 30.44% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.77% of rays or 30.42% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.76% of rays or 30.42% of flux at 0% alarm level!
+Alarm! M1 absorbes 31.80% of rays or 30.46% of flux at 0% alarm level!
+3 calculation steps took 455.6 s
+50000.000000	2.10997569e+14	3.92498980e+12	8.14187707e+13	4.42182237e-01	1.12338076e-01	9.47372412e-01	6.79390384e-02	7.01322940e-02	1260.546415	40536.341819
+
+energy 60000.0 eV, 4 of 5
+pitch 0.00131885714285714
+yafterM1 42.99474285714277
+272977 rays of 500000
+545669 rays of 500000
+
+FILTER TRANSMISSION
+before filters : 5.00000000e+05
+after diamond  : 4.41347185e+05   T_D=8.826944e-01
+after SiC      : 2.87782292e+05   T_SiC=6.520542e-01
+total filters  : T=5.755646e-01
+
+Previous-energy Fcurv: 1.009437500
+Fine Fcurv search: 0.994437500 to 1.024437500
+F=0.999437  focus=55925.0 mm  offset=-475.0 mm  FWHM=0.2900 mm
+F=1.004438  focus=56500.0 mm  offset=100.0 mm  FWHM=0.2700 mm
+F=1.009437  focus=56015.0 mm  offset=-385.0 mm  FWHM=0.2780 mm
+F=1.014437  focus=56435.0 mm  offset=35.0 mm  FWHM=0.2640 mm
+F=1.019437  focus=56385.0 mm  offset=-15.0 mm  FWHM=0.2620 mm
+
+Final horizontal Fcurv: 1.019437500
+Reduced-beam horizontal focus: 56385.000 mm
+Reduced-beam focus residual: -15.000 mm
+Horizontal FWHM at waist: 2.620000e-01 mm
+Optimized double-Laue correction: Fcurv=1.019437500
+R/R0=0.950  R=16695861.911 mm  focus=54530.0 mm  offset=-1870.0 mm  FWHM=0.0960 mm
+R/R0=1.000  R=17574591.486 mm  focus=55665.0 mm  offset=-735.0 mm  FWHM=0.1020 mm
+R/R0=1.050  R=18453321.060 mm  focus=56725.0 mm  offset=325.0 mm  FWHM=0.1080 mm
+R/R0=1.100  R=19332050.634 mm  focus=57060.0 mm  offset=660.0 mm  FWHM=0.1140 mm
+R/R0=1.150  R=20210780.209 mm  focus=58210.0 mm  offset=1810.0 mm  FWHM=0.1260 mm
+R/R0=1.200  R=21089509.783 mm  focus=58400.0 mm  offset=2000.0 mm  FWHM=0.1660 mm
+R/R0=1.250  R=21968239.357 mm  focus=58275.0 mm  offset=1875.0 mm  FWHM=0.2400 mm
+C1: Iin=2.87782292e+05, Iout=7.38028196e+04, T=2.56453651e-01
+C2: Iin=7.38028196e+04, Iout=3.35367648e+04, T=4.54410346e-01
+Double transmission = 0.1165
+
+FINAL BEAM WIDTHS FROM RAYS
+x FWHM : 4.293895e-01 mm
+z FWHM : 1.198036e-01 mm
+x' FWHM: 8.472942e-01 mrad
+z' FWHM: 6.185276e-02 mrad
+
+CAUSTIC RESULTS
+Horizontal focus: 56403.000000 mm
+Horizontal focus offset: 3.000 mm
+Minimum horizontal FWHM: 3.860000e-01 mm
+Vertical focus: 56542.000000 mm
+Vertical focus offset: 142.000 mm
+Minimum vertical FWHM: 1.070000e-01 mm
+Alarm! M1 absorbes 32.81% of rays or 32.87% of flux at 0% alarm level!
+Alarm! M1 absorbes 32.80% of rays or 32.80% of flux at 0% alarm level!
+Alarm! M1 absorbes 32.79% of rays or 32.75% of flux at 0% alarm level!
+Alarm! M1 absorbes 32.78% of rays or 32.69% of flux at 0% alarm level!
+Alarm! M1 absorbes 32.77% of rays or 32.65% of flux at 0% alarm level!
+Alarm! M1 absorbes 32.76% of rays or 32.61% of flux at 0% alarm level!
+Alarm! M1 absorbes 32.75% of rays or 32.57% of flux at 0% alarm level!
+Alarm! M1 absorbes 32.79% of rays or 32.75% of flux at 0% alarm level!
+4 calculation steps took 597.4 s
+60000.000000	8.73058813e+13	1.64337392e+12	3.09087802e+13	4.29389479e-01	1.19803625e-01	8.47294206e-01	6.18527643e-02	1.16245662e-01	1050.455301	33780.283417
+
+energy 70000.0 eV, 5 of 5
+pitch 0.0011402857142857096
+yafterM1 37.173314285714135
+246299 rays of 500000
+492887 rays of 500000
+739904 rays of 500000
+
+FILTER TRANSMISSION
+before filters : 5.00000000e+05
+after diamond  : 4.44114440e+05   T_D=8.882289e-01
+after SiC      : 3.10570710e+05   T_SiC=6.993033e-01
+total filters  : T=6.211414e-01
+
+Previous-energy Fcurv: 1.019437500
+Fine Fcurv search: 1.004437500 to 1.034437500
+F=0.994750  focus=55885.0 mm  offset=-515.0 mm  FWHM=0.2800 mm
+F=0.999750  focus=56045.0 mm  offset=-355.0 mm  FWHM=0.3080 mm
+F=1.004750  focus=56505.0 mm  offset=105.0 mm  FWHM=0.2900 mm
+F=1.009750  focus=56765.0 mm  offset=365.0 mm  FWHM=0.3280 mm
+F=1.014750  focus=57205.0 mm  offset=805.0 mm  FWHM=0.3120 mm
+
+Final horizontal Fcurv: 1.004750000
+Reduced-beam horizontal focus: 56505.000 mm
+Reduced-beam focus residual: 105.000 mm
+Horizontal FWHM at waist: 2.900000e-01 mm
+Optimized double-Laue correction: Fcurv=1.004750000
+R/R0=0.950  R=19310471.797 mm  focus=54230.0 mm  offset=-2170.0 mm  FWHM=0.1020 mm
+R/R0=1.000  R=20326812.418 mm  focus=55345.0 mm  offset=-1055.0 mm  FWHM=0.1080 mm
+R/R0=1.050  R=21343153.039 mm  focus=56390.0 mm  offset=-10.0 mm  FWHM=0.1160 mm
+R/R0=1.100  R=22359493.660 mm  focus=57560.0 mm  offset=1160.0 mm  FWHM=0.1240 mm
+R/R0=1.150  R=23375834.281 mm  focus=57960.0 mm  offset=1560.0 mm  FWHM=0.1260 mm
+R/R0=1.200  R=24392174.902 mm  focus=58350.0 mm  offset=1950.0 mm  FWHM=0.1420 mm
+R/R0=1.250  R=25408515.523 mm  focus=58385.0 mm  offset=1985.0 mm  FWHM=0.2160 mm
+C1: Iin=3.10570710e+05, Iout=6.60456305e+04, T=2.12658916e-01
+C2: Iin=6.60456305e+04, Iout=2.77304067e+04, T=4.19867393e-01
+Double transmission = 0.0893
+
+FINAL BEAM WIDTHS FROM RAYS
+x FWHM : 4.043294e-01 mm
+z FWHM : 1.285543e-01 mm
+x' FWHM: 8.135464e-01 mrad
+z' FWHM: 5.367165e-02 mrad
+
+CAUSTIC RESULTS
+Horizontal focus: 56390.000000 mm
+Horizontal focus offset: -10.000 mm
+Minimum horizontal FWHM: 3.470000e-01 mm
+Vertical focus: 56402.000000 mm
+Vertical focus offset: 2.000 mm
+Minimum vertical FWHM: 1.150000e-01 mm
+Alarm! M1 absorbes 33.66% of rays or 35.94% of flux at 0% alarm level!
+Alarm! M1 absorbes 33.64% of rays or 35.93% of flux at 0% alarm level!
+Alarm! M1 absorbes 33.63% of rays or 35.93% of flux at 0% alarm level!
+Alarm! M1 absorbes 33.62% of rays or 35.92% of flux at 0% alarm level!
+Alarm! M1 absorbes 33.61% of rays or 35.92% of flux at 0% alarm level!
+Alarm! M1 absorbes 33.61% of rays or 35.92% of flux at 0% alarm level!
+Alarm! M1 absorbes 33.60% of rays or 35.93% of flux at 0% alarm level!
+Alarm! M1 absorbes 33.63% of rays or 35.93% of flux at 0% alarm level!
+5 calculation steps took 743.5 s
+70000.000000	3.55354838e+13	4.47189369e+11	8.79731277e+12	4.04329361e-01	1.28554340e-01	8.13546386e-01	5.36716453e-02	1.79697593e-01	900.390234	28954.527863
+
+finished
+EXIT 0 Wed Oct 28 05:40:02 PM CET 2026

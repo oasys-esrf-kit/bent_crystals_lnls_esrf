@@ -28,15 +28,24 @@ Four beamlines are simulated:
 
 ## Known issues
 
-These affect the results in `XRTcodes/run_XRT_*` and `RUN_XRT.md`; the scripts are not
-corrected yet.
+Both issues are **fixed in the code**, and the scans have been rerun
+(`XRTcodes/run_XRT_*_fixed/`). [XRTcodes/RUN_XRT.md](XRTcodes/RUN_XRT.md) shows the new
+results, keeps the old ones (`XRTcodes/run_XRT_*/`) for reference, and has a TODO list of
+the decisions still pending for the Bragg+Laue beamlines.
+[XRTcodes/RERUN_RESULTS.md](XRTcodes/RERUN_RESULTS.md) compares old and new results energy
+by energy. The `INFO.md` files of the OASYS workspaces still quote results from before the
+fixes.
 
-- **[XRTcodes/BUG_ML.md](XRTcodes/BUG_ML.md):** the internal multilamellar (ML) Laue
-  reflectivity is too high (about 1.4× XOPPY in the SSU_BLM case).
-- **[XRTcodes/BUG_GEOMETRY.md](XRTcodes/BUG_GEOMETRY.md):** the scripts pass the local
-  beam of the 10 m mask downstream. This effectively moves the optics 10 m farther from the
-  source and explains the Fcurv values above 1. The OASYS workspaces use the correct
-  geometry.
+- **[XRTcodes/BUG_ML.md](XRTcodes/BUG_ML.md):** the internal multilamellar (ML)
+  reflectivity had three bugs, now fixed and checked against XOPPY.
+  - Laue was too high: about 1.4× XOPPY in the SSU_BLM case.
+  - Bragg ignored absorption.
+  - Open question: which absorption coefficient to use. xrt's total value is the current
+    choice; XOPPY uses photoelectric only.
+- **[XRTcodes/BUG_GEOMETRY.md](XRTcodes/BUG_GEOMETRY.md):** the scripts passed the local
+  beam of the 10 m mask downstream. This effectively moved the optics 10 m farther from the
+  source and explains the Fcurv values above 1. The OASYS workspaces always used the
+  correct geometry.
 
 ## Contents of XRTcodes/
 

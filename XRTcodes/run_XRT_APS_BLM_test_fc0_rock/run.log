@@ -1,0 +1,657 @@
+START Wed Oct 28 06:38:59 PM CET 2026
+aL 48.96742913105711
+The last 10 runs
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/oasys_SSU_BLM/script_oasys.py::
+start: Wed, 28 Oct 2026 14:59:14; stop: 15:00:08; duration: 53.7 s
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/bnl_run/bnl_test.py::
+start: Wed, 28 Oct 2026 15:22:20; stop: 15:22:27; duration: 6.5 s
+/usr/lib/python3.12/inspect.py::
+start: Wed, 28 Oct 2026 15:25:10; stop: 15:25:28; duration: 17.5 s
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/aps_run/aps_test.py::
+start: Wed, 28 Oct 2026 15:32:12; stop: 15:32:27; duration: 15.1 s
+/tmp/claude-4230/-home-srio-OASYS2-0-OASYS2-XRT/d385c959-78d5-4516-9f07-cf692bc9cfa5/scratchpad/sbdl_run/sbdl_test.py::
+start: Wed, 28 Oct 2026 15:35:01; stop: 15:35:06; duration: 4.5 s
+/usr/lib/python3.12/inspect.py::
+start: Wed, 28 Oct 2026 16:28:54; stop: 16:29:49; duration: 54.3 s
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/run_XRT_SSU_SBDL_fixed/../XRT_SSU_SBDL.py::
+start: Wed, 28 Oct 2026 16:59:00; stop: 17:22:41; duration: 1421.7 s
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/run_XRT_APS_BLM_fixed/../XRT_APS_BLM.py::
+start: Wed, 28 Oct 2026 17:22:43; stop: 17:27:37; duration: 293.6 s
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/run_XRT_BNL_SBDL_fixed/../XRT_BNL_SBDL.py::
+start: Wed, 28 Oct 2026 17:27:38; stop: 17:40:01; duration: 743.5 s
+/home/srio/Desktop/BRASIL/SRIO/XRTcodes/XRT_SSU_BLM.py::
+start: Wed, 28 Oct 2026 17:47:59; stop: 18:38:59; duration: 3060.0 s
+energy 30000.0 eV, 1 of 16
+The job is running... 
+10478 rays of 100000
+20761 rays of 100000
+31120 rays of 100000
+41547 rays of 100000
+51961 rays of 100000
+62409 rays of 100000
+72828 rays of 100000
+83148 rays of 100000
+93332 rays of 100000
+103692 rays of 100000
+ROCK Laue pitch offset +5 urad: intensity 106.10 (at 0 offset 92.24)
+51717 rays of 500000
+103413 rays of 500000
+154722 rays of 500000
+206392 rays of 500000
+258091 rays of 500000
+310397 rays of 500000
+362066 rays of 500000
+413581 rays of 500000
+465111 rays of 500000
+516464 rays of 500000
+
+Broad Fcurv optimization...
+
+Broad Fcurv result: 0.996000000
+Fine Fcurv search: 0.981000000 to 1.011000000
+
+Optimized geometry correction: Fcurv=1.001000000 (optimization method=ML, final method=ML)
+
+Calculating broad caustic...
+Broad horizontal focus: 53100.000 mm
+Horizontal focus: 53030.000000 mm
+Minimum horizontal FWHM: 8.807903e-03 mm
+Vertical focus: 52900.000000 mm
+Minimum vertical FWHM: 6.964095e-01 mm
+1 calculation step took 20.3 s
+30000.000000	7.54081081e+13	1.75899518e+11	1.84987641e+12	1.94833759e-01	4.50000000e-01	1.00801808e+00	6.81094659e-02	2.27977214e-03	225195.363226	2473.398219	41877.362087
+
+energy 32000.0 eV, 2 of 16
+9946 rays of 100000
+20113 rays of 100000
+29882 rays of 100000
+39707 rays of 100000
+49646 rays of 100000
+59672 rays of 100000
+69753 rays of 100000
+79802 rays of 100000
+89763 rays of 100000
+99657 rays of 100000
+109570 rays of 100000
+ROCK Laue pitch offset +5 urad: intensity 93.45 (at 0 offset 74.27)
+50101 rays of 500000
+99831 rays of 500000
+149738 rays of 500000
+199257 rays of 500000
+249289 rays of 500000
+299386 rays of 500000
+349729 rays of 500000
+399818 rays of 500000
+449934 rays of 500000
+499186 rays of 500000
+548994 rays of 500000
+
+Previous-energy Fcurv: 1.001000000
+Fine Fcurv search: 0.986000000 to 1.016000000
+
+Optimized geometry correction: Fcurv=0.998500000 (optimization method=ML, final method=ML)
+Horizontal focus: 52960.000000 mm
+Minimum horizontal FWHM: 8.614820e-03 mm
+Vertical focus: 52830.000000 mm
+Minimum vertical FWHM: 6.581449e-01 mm
+2 calculation steps took 39.3 s
+32000.000000	6.97553453e+13	1.46930697e+11	1.67340648e+12	1.78133722e-01	4.50000000e-01	9.24016574e-01	8.51368324e-02	2.93112549e-03	222719.983083	2318.745885	39258.927359
+
+energy 34000.0 eV, 3 of 16
+9586 rays of 100000
+19235 rays of 100000
+28849 rays of 100000
+38494 rays of 100000
+48131 rays of 100000
+57692 rays of 100000
+67319 rays of 100000
+77094 rays of 100000
+86665 rays of 100000
+96095 rays of 100000
+105681 rays of 100000
+ROCK Laue pitch offset +10 urad: intensity 116.45 (at 0 offset 84.92)
+48632 rays of 500000
+96688 rays of 500000
+145036 rays of 500000
+193362 rays of 500000
+241419 rays of 500000
+289931 rays of 500000
+338243 rays of 500000
+386879 rays of 500000
+435051 rays of 500000
+482985 rays of 500000
+531307 rays of 500000
+
+Previous-energy Fcurv: 0.998500000
+Fine Fcurv search: 0.983500000 to 1.013500000
+
+Optimized geometry correction: Fcurv=0.997250000 (optimization method=ML, final method=ML)
+Horizontal focus: 52770.000000 mm
+Minimum horizontal FWHM: 9.218473e-03 mm
+Vertical focus: 52760.000000 mm
+Minimum vertical FWHM: 7.359162e-01 mm
+3 calculation steps took 59.1 s
+34000.000000	6.41963725e+13	1.62486891e+11	1.37777082e+12	1.89267080e-01	5.50000000e-01	1.04721878e+00	8.51368324e-02	5.86301234e-03	220932.853422	2182.286935	36948.526710
+
+energy 36000.0 eV, 4 of 16
+9363 rays of 100000
+18690 rays of 100000
+27996 rays of 100000
+37490 rays of 100000
+46906 rays of 100000
+56315 rays of 100000
+65552 rays of 100000
+74767 rays of 100000
+84202 rays of 100000
+93505 rays of 100000
+102695 rays of 100000
+ROCK Laue pitch offset +10 urad: intensity 192.28 (at 0 offset 138.60)
+46856 rays of 500000
+93950 rays of 500000
+140383 rays of 500000
+187393 rays of 500000
+234263 rays of 500000
+281211 rays of 500000
+327685 rays of 500000
+374350 rays of 500000
+420940 rays of 500000
+467584 rays of 500000
+514683 rays of 500000
+
+Previous-energy Fcurv: 0.997250000
+Fine Fcurv search: 0.982250000 to 1.012250000
+
+Optimized geometry correction: Fcurv=0.999687500 (optimization method=ML, final method=ML)
+Horizontal focus: 52841.000000 mm
+Minimum horizontal FWHM: 8.040828e-03 mm
+Vertical focus: 52570.000000 mm
+Minimum vertical FWHM: 5.829492e-01 mm
+4 calculation steps took 79.8 s
+36000.000000	5.90075706e+13	2.62584169e+11	3.17069907e+12	1.67000365e-01	4.50000000e-01	1.04161868e+00	6.81094659e-02	7.98559147e-03	219648.374844	2060.989120	34894.820804
+
+energy 38000.0 eV, 5 of 16
+9048 rays of 100000
+18218 rays of 100000
+27228 rays of 100000
+36301 rays of 100000
+45321 rays of 100000
+54468 rays of 100000
+63385 rays of 100000
+72455 rays of 100000
+81350 rays of 100000
+90390 rays of 100000
+99547 rays of 100000
+108633 rays of 100000
+ROCK Laue pitch offset +10 urad: intensity 175.65 (at 0 offset 108.35)
+45463 rays of 500000
+90823 rays of 500000
+136172 rays of 500000
+181139 rays of 500000
+226729 rays of 500000
+272118 rays of 500000
+317214 rays of 500000
+362372 rays of 500000
+407677 rays of 500000
+453227 rays of 500000
+498195 rays of 500000
+543816 rays of 500000
+
+Previous-energy Fcurv: 0.999687500
+Fine Fcurv search: 0.984687500 to 1.014687500
+
+Optimized geometry correction: Fcurv=1.002187500 (optimization method=ML, final method=ML)
+Horizontal focus: 52710.000000 mm
+Minimum horizontal FWHM: 8.334046e-03 mm
+Vertical focus: 52641.000000 mm
+Minimum vertical FWHM: 6.653917e-01 mm
+5 calculation steps took 101.7 s
+38000.000000	5.40913653e+13	2.13576103e+11	2.14917280e+12	1.89267080e-01	5.00000000e-01	1.00801808e+00	6.81094659e-02	1.08539654e-02	218741.173501	1952.458562	33057.278651
+
+energy 40000.0 eV, 6 of 16
+8741 rays of 100000
+17585 rays of 100000
+26300 rays of 100000
+35073 rays of 100000
+43727 rays of 100000
+52632 rays of 100000
+61331 rays of 100000
+70259 rays of 100000
+78983 rays of 100000
+87798 rays of 100000
+96794 rays of 100000
+105605 rays of 100000
+ROCK Laue pitch offset +10 urad: intensity 173.93 (at 0 offset 104.87)
+43755 rays of 500000
+87820 rays of 500000
+131988 rays of 500000
+176282 rays of 500000
+220241 rays of 500000
+264835 rays of 500000
+309140 rays of 500000
+353109 rays of 500000
+397550 rays of 500000
+441563 rays of 500000
+485932 rays of 500000
+530345 rays of 500000
+
+Previous-energy Fcurv: 1.002187500
+Fine Fcurv search: 0.987187500 to 1.017187500
+
+Optimized geometry correction: Fcurv=0.995687500 (optimization method=ML, final method=ML)
+Horizontal focus: 52580.000000 mm
+Minimum horizontal FWHM: 9.533573e-03 mm
+Vertical focus: 52640.000000 mm
+Minimum vertical FWHM: 6.801825e-01 mm
+6 calculation steps took 124.7 s
+40000.000000	4.99996616e+13	1.86061752e+11	1.33248103e+12	2.33800511e-01	5.50000000e-01	8.73615670e-01	6.81094659e-02	1.41385061e-02	218123.997548	1854.780161	31403.475504
+
+energy 42000.0 eV, 7 of 16
+8435 rays of 100000
+17112 rays of 100000
+25754 rays of 100000
+34259 rays of 100000
+42711 rays of 100000
+51202 rays of 100000
+59833 rays of 100000
+68435 rays of 100000
+77015 rays of 100000
+85523 rays of 100000
+94079 rays of 100000
+102623 rays of 100000
+ROCK Laue pitch offset +15 urad: intensity 169.63 (at 0 offset 93.09)
+42806 rays of 500000
+85716 rays of 500000
+128280 rays of 500000
+171272 rays of 500000
+213978 rays of 500000
+256736 rays of 500000
+299862 rays of 500000
+342844 rays of 500000
+385488 rays of 500000
+428074 rays of 500000
+470776 rays of 500000
+513635 rays of 500000
+
+Previous-energy Fcurv: 0.995687500
+Fine Fcurv search: 0.980687500 to 1.010687500
+
+Optimized geometry correction: Fcurv=1.000687500 (optimization method=ML, final method=ML)
+Horizontal focus: 52732.000000 mm
+Minimum horizontal FWHM: 1.511638e-02 mm
+Vertical focus: 52476.000000 mm
+Minimum vertical FWHM: 7.388539e-01 mm
+7 calculation steps took 148.9 s
+42000.000000	4.58313448e+13	1.70437722e+11	1.35023603e+12	1.67000365e-01	6.00000000e-01	1.03601858e+00	6.81094659e-02	1.83374105e-02	217734.590381	1766.403601	29907.162792
+
+energy 44000.0 eV, 8 of 16
+8407 rays of 100000
+16815 rays of 100000
+25246 rays of 100000
+33471 rays of 100000
+42043 rays of 100000
+50328 rays of 100000
+58796 rays of 100000
+67115 rays of 100000
+75316 rays of 100000
+83723 rays of 100000
+91964 rays of 100000
+100294 rays of 100000
+ROCK Laue pitch offset +15 urad: intensity 208.89 (at 0 offset 92.73)
+41946 rays of 500000
+83881 rays of 500000
+125764 rays of 500000
+167585 rays of 500000
+209287 rays of 500000
+251222 rays of 500000
+293109 rays of 500000
+335160 rays of 500000
+376879 rays of 500000
+418680 rays of 500000
+460130 rays of 500000
+501334 rays of 500000
+
+Previous-energy Fcurv: 1.000687500
+Fine Fcurv search: 0.985687500 to 1.015687500
+
+Optimized geometry correction: Fcurv=1.003187500 (optimization method=ML, final method=ML)
+Horizontal focus: 52670.000000 mm
+Minimum horizontal FWHM: 7.972183e-03 mm
+Vertical focus: 52532.000000 mm
+Minimum vertical FWHM: 8.148452e-01 mm
+8 calculation steps took 174.1 s
+44000.000000	4.20593039e+13	1.89652370e+11	1.19877703e+12	2.05967117e-01	7.00000000e-01	9.46416976e-01	8.51368324e-02	2.44196230e-02	217527.576949	1686.060443	28546.864442
+
+energy 46000.0 eV, 9 of 16
+8204 rays of 100000
+16299 rays of 100000
+24490 rays of 100000
+32539 rays of 100000
+40640 rays of 100000
+48582 rays of 100000
+56527 rays of 100000
+64692 rays of 100000
+72944 rays of 100000
+81251 rays of 100000
+89392 rays of 100000
+97562 rays of 100000
+105700 rays of 100000
+ROCK Laue pitch offset +20 urad: intensity 244.55 (at 0 offset 113.94)
+40806 rays of 500000
+81545 rays of 500000
+122483 rays of 500000
+163182 rays of 500000
+203811 rays of 500000
+244404 rays of 500000
+285529 rays of 500000
+326343 rays of 500000
+367412 rays of 500000
+407753 rays of 500000
+448611 rays of 500000
+489315 rays of 500000
+530449 rays of 500000
+
+Previous-energy Fcurv: 1.003187500
+Fine Fcurv search: 0.988187500 to 1.018187500
+
+Optimized geometry correction: Fcurv=1.000687500 (optimization method=ML, final method=ML)
+Horizontal focus: 52630.000000 mm
+Minimum horizontal FWHM: 7.851461e-03 mm
+Vertical focus: 52547.000000 mm
+Minimum vertical FWHM: 8.551405e-01 mm
+9 calculation steps took 200.7 s
+46000.000000	3.86275199e+13	1.96865974e+11	1.21949453e+12	1.94833759e-01	7.50000000e-01	1.01921828e+00	6.81094659e-02	3.54356447e-02	217469.276086	1612.702847	27304.839365
+
+energy 48000.0 eV, 10 of 16
+8015 rays of 100000
+15859 rays of 100000
+23819 rays of 100000
+31844 rays of 100000
+39958 rays of 100000
+47994 rays of 100000
+56122 rays of 100000
+64118 rays of 100000
+72069 rays of 100000
+80008 rays of 100000
+88062 rays of 100000
+96032 rays of 100000
+104035 rays of 100000
+ROCK Laue pitch offset +20 urad: intensity 355.95 (at 0 offset 157.09)
+39834 rays of 500000
+79791 rays of 500000
+119403 rays of 500000
+159555 rays of 500000
+199414 rays of 500000
+239174 rays of 500000
+278671 rays of 500000
+318264 rays of 500000
+358260 rays of 500000
+397962 rays of 500000
+437805 rays of 500000
+477870 rays of 500000
+517780 rays of 500000
+
+Previous-energy Fcurv: 1.000687500
+Fine Fcurv search: 0.985687500 to 1.015687500
+
+Optimized geometry correction: Fcurv=1.001312500 (optimization method=ML, final method=ML)
+Horizontal focus: 52798.000000 mm
+Minimum horizontal FWHM: 1.171002e-02 mm
+Vertical focus: 52433.000000 mm
+Minimum vertical FWHM: 8.394174e-01 mm
+10 calculation steps took 228.5 s
+48000.000000	3.54539843e+13	2.90930544e+11	1.88610450e+12	1.94833759e-01	7.00000000e-01	1.04161868e+00	6.81094659e-02	4.24081748e-02	217534.286072	1545.457613	26166.303332
+
+energy 50000.0 eV, 11 of 16
+7559 rays of 100000
+15435 rays of 100000
+23374 rays of 100000
+31150 rays of 100000
+38903 rays of 100000
+46720 rays of 100000
+54629 rays of 100000
+62408 rays of 100000
+70221 rays of 100000
+78059 rays of 100000
+85774 rays of 100000
+93583 rays of 100000
+101397 rays of 100000
+ROCK Laue pitch offset +20 urad: intensity 487.24 (at 0 offset 180.66)
+38880 rays of 500000
+77662 rays of 500000
+116705 rays of 500000
+155627 rays of 500000
+194555 rays of 500000
+233606 rays of 500000
+272503 rays of 500000
+311521 rays of 500000
+350750 rays of 500000
+389620 rays of 500000
+428654 rays of 500000
+467544 rays of 500000
+506806 rays of 500000
+
+Previous-energy Fcurv: 1.001312500
+Fine Fcurv search: 0.986312500 to 1.016312500
+
+Optimized geometry correction: Fcurv=0.999687500 (optimization method=ML, final method=ML)
+Horizontal focus: 52706.000000 mm
+Minimum horizontal FWHM: 9.800664e-03 mm
+Vertical focus: 52602.000000 mm
+Minimum vertical FWHM: 8.455957e-01 mm
+11 calculation steps took 258.0 s
+50000.000000	3.24724202e+13	3.35138726e+11	2.19388606e+12	1.89267080e-01	7.50000000e-01	1.04161868e+00	6.81094659e-02	4.86063396e-02	217703.180091	1483.591256	25118.837603
+
+energy 52000.0 eV, 12 of 16
+7704 rays of 100000
+15333 rays of 100000
+22968 rays of 100000
+30341 rays of 100000
+37924 rays of 100000
+45564 rays of 100000
+53172 rays of 100000
+60775 rays of 100000
+68371 rays of 100000
+76191 rays of 100000
+83640 rays of 100000
+91381 rays of 100000
+99047 rays of 100000
+106653 rays of 100000
+ROCK Laue pitch offset +20 urad: intensity 549.50 (at 0 offset 187.60)
+38325 rays of 500000
+76678 rays of 500000
+115199 rays of 500000
+153172 rays of 500000
+191694 rays of 500000
+229871 rays of 500000
+267863 rays of 500000
+306105 rays of 500000
+344121 rays of 500000
+382158 rays of 500000
+419695 rays of 500000
+457706 rays of 500000
+495862 rays of 500000
+533784 rays of 500000
+
+Previous-energy Fcurv: 0.999687500
+Fine Fcurv search: 0.984687500 to 1.014687500
+
+Optimized geometry correction: Fcurv=1.000312500 (optimization method=ML, final method=ML)
+Horizontal focus: 52686.000000 mm
+Minimum horizontal FWHM: 9.403471e-03 mm
+Vertical focus: 52511.000000 mm
+Minimum vertical FWHM: 8.121370e-01 mm
+12 calculation steps took 288.4 s
+52000.000000	2.97256765e+13	3.43394965e+11	2.31474235e+12	1.89267080e-01	7.50000000e-01	1.03041848e+00	6.81094659e-02	4.96540199e-02	217960.916167	1426.483131	24151.934018
+
+energy 54000.0 eV, 13 of 16
+7588 rays of 100000
+15014 rays of 100000
+22494 rays of 100000
+30035 rays of 100000
+37562 rays of 100000
+44982 rays of 100000
+52458 rays of 100000
+59924 rays of 100000
+67401 rays of 100000
+74827 rays of 100000
+82369 rays of 100000
+89820 rays of 100000
+97285 rays of 100000
+104677 rays of 100000
+ROCK Laue pitch offset +25 urad: intensity 576.03 (at 0 offset 185.61)
+37454 rays of 500000
+74606 rays of 500000
+111952 rays of 500000
+149225 rays of 500000
+186291 rays of 500000
+223277 rays of 500000
+261069 rays of 500000
+298476 rays of 500000
+336160 rays of 500000
+373573 rays of 500000
+410955 rays of 500000
+448512 rays of 500000
+485843 rays of 500000
+523223 rays of 500000
+
+Previous-energy Fcurv: 1.000312500
+Fine Fcurv search: 0.985312500 to 1.015312500
+
+Optimized geometry correction: Fcurv=0.997812500 (optimization method=ML, final method=ML)
+Horizontal focus: 52748.000000 mm
+Minimum horizontal FWHM: 9.925303e-03 mm
+Vertical focus: 52495.000000 mm
+Minimum vertical FWHM: 1.000465e+00 mm
+13 calculation steps took 320.2 s
+54000.000000	2.72309240e+13	3.45668150e+11	1.74881886e+12	2.00400438e-01	9.00000000e-01	1.05841898e+00	6.81094659e-02	6.82808706e-02	218295.718568	1373.604546	23256.641196
+
+energy 56000.0 eV, 14 of 16
+7248 rays of 100000
+14610 rays of 100000
+22003 rays of 100000
+29375 rays of 100000
+36657 rays of 100000
+43862 rays of 100000
+51191 rays of 100000
+58477 rays of 100000
+65864 rays of 100000
+73067 rays of 100000
+80306 rays of 100000
+87703 rays of 100000
+95122 rays of 100000
+102558 rays of 100000
+ROCK Laue pitch offset +25 urad: intensity 649.51 (at 0 offset 180.60)
+36604 rays of 500000
+73189 rays of 500000
+109496 rays of 500000
+146166 rays of 500000
+182578 rays of 500000
+219565 rays of 500000
+256199 rays of 500000
+293142 rays of 500000
+329790 rays of 500000
+366769 rays of 500000
+403449 rays of 500000
+440069 rays of 500000
+476536 rays of 500000
+512998 rays of 500000
+
+Previous-energy Fcurv: 0.997812500
+Fine Fcurv search: 0.982812500 to 1.012812500
+
+Optimized geometry correction: Fcurv=1.001875000 (optimization method=ML, final method=ML)
+Horizontal focus: 52835.000000 mm
+Minimum horizontal FWHM: 7.789689e-02 mm
+Vertical focus: 52548.000000 mm
+Minimum vertical FWHM: 1.076393e+00 mm
+14 calculation steps took 353.6 s
+56000.000000	2.49276337e+13	3.37988073e+11	1.84239317e+12	1.83700401e-01	9.00000000e-01	1.03041848e+00	6.81094659e-02	7.48502562e-02	218698.277143	1324.502332	22425.286526
+
+energy 58000.0 eV, 15 of 16
+7020 rays of 100000
+14197 rays of 100000
+21463 rays of 100000
+28713 rays of 100000
+35914 rays of 100000
+43085 rays of 100000
+50220 rays of 100000
+57438 rays of 100000
+64713 rays of 100000
+71807 rays of 100000
+78932 rays of 100000
+86076 rays of 100000
+93141 rays of 100000
+100358 rays of 100000
+ROCK Laue pitch offset +30 urad: intensity 666.04 (at 0 offset 183.60)
+35666 rays of 500000
+71521 rays of 500000
+107200 rays of 500000
+143140 rays of 500000
+178705 rays of 500000
+214521 rays of 500000
+250706 rays of 500000
+286241 rays of 500000
+322161 rays of 500000
+358038 rays of 500000
+394081 rays of 500000
+429994 rays of 500000
+465945 rays of 500000
+501624 rays of 500000
+
+Previous-energy Fcurv: 1.001875000
+Fine Fcurv search: 0.986875000 to 1.016875000
+
+Optimized geometry correction: Fcurv=1.001875000 (optimization method=ML, final method=ML)
+Horizontal focus: 52777.000000 mm
+Minimum horizontal FWHM: 1.513018e-02 mm
+Vertical focus: 52901.000000 mm
+Minimum vertical FWHM: 1.187025e+00 mm
+15 calculation steps took 388.3 s
+58000.000000	2.27909904e+13	3.24942387e+11	1.43032491e+12	2.00400438e-01	1.00000000e+00	1.05841898e+00	6.81094659e-02	9.11286119e-02	219161.165314	1278.785831	21651.255690
+
+energy 60000.0 eV, 16 of 16
+6902 rays of 100000
+13902 rays of 100000
+21014 rays of 100000
+28024 rays of 100000
+35018 rays of 100000
+42033 rays of 100000
+49029 rays of 100000
+56045 rays of 100000
+63068 rays of 100000
+70153 rays of 100000
+77181 rays of 100000
+84301 rays of 100000
+91341 rays of 100000
+98460 rays of 100000
+105507 rays of 100000
+ROCK Laue pitch offset +30 urad: intensity 700.26 (at 0 offset 200.93)
+34805 rays of 500000
+70098 rays of 500000
+105450 rays of 500000
+140392 rays of 500000
+175840 rays of 500000
+211188 rays of 500000
+246530 rays of 500000
+281389 rays of 500000
+316592 rays of 500000
+351497 rays of 500000
+386813 rays of 500000
+421831 rays of 500000
+457145 rays of 500000
+492359 rays of 500000
+527745 rays of 500000
+
+Previous-energy Fcurv: 1.001875000
+Fine Fcurv search: 0.986875000 to 1.016875000
+
+Optimized geometry correction: Fcurv=1.000000000 (optimization method=ML, final method=ML)
+Horizontal focus: 52915.000000 mm
+Minimum horizontal FWHM: 1.668959e-02 mm
+Vertical focus: 52591.000000 mm
+Minimum vertical FWHM: 1.264084e+00 mm
+16 calculation steps took 424.6 s
+60000.000000	2.08533351e+13	3.16300548e+11	1.37022239e+12	1.83700401e-01	1.15000000e+00	1.04721878e+00	8.51368324e-02	1.07016227e-01	219678.411047	1236.116468	20928.816284
+
+finished
+EXIT 0 Wed Oct 28 06:46:05 PM CET 2026

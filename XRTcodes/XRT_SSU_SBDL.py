@@ -325,10 +325,11 @@ def run_process(beamLine):
     # ================================================================
 
     beamSource = beamLine.Source.shine()
+    # propagate() and expose() return local beams: downstream elements get the global beam
     beamMask1 = beamLine.Mask1.propagate(beamSource)
-    beamSCR1 = beamLine.Screen1.expose(beamMask1)
+    beamSCR1 = beamLine.Screen1.expose(beamSource)
 
-    beamFilter1Global,beamFilter1Local1,beamFilter1Local2 = beamLine.Filter1.double_refract(beamMask1)
+    beamFilter1Global,beamFilter1Local1,beamFilter1Local2 = beamLine.Filter1.double_refract(beamSource)
     beamSCR2 = beamLine.Screen2.expose(beamFilter1Global)
     # Fixed input immediately before C1.
     full_input_before_C1 = rs.Beam(copyFrom=beamFilter1Global)

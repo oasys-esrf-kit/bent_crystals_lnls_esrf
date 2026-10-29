@@ -1,16 +1,27 @@
 # XRT runs: bent-crystal monochromators
 
 The four scripts `XRT_APS_BLM.py`, `XRT_BNL_SBDL.py`, `XRT_SSU_BLM.py` and
-`XRT_SSU_SBDL.py` were run with xrt 2.0.0 (`~/venv/oasys2`), 500 000 rays, full
-energy lists. All four finished with exit code 0. These results have not yet been
-compared with xrt 1.x results (xrt 1.x is not installed in this environment).
+`XRT_SSU_SBDL.py` (plus `XRT_SSU_BLM_PP.py`, SSU_BLM with the PP Laue model) were run with
+xrt 2.0.0 (`~/venv/oasys2`), 500 000 rays, full energy lists. They have not been compared
+with xrt 1.x (not installed in this environment).
 
-> **Warning: the ML (multilamellar) reflectivity is suspect.** For the SSU_BLM Laue
-> crystal at 80 keV, the internal ML gives an integrated reflectivity 1.43× XOPPY's ML,
-> while the internal PP is within 9% of XOPPY's PP. The SSU_BLM flux computed with ML is
-> therefore about 1.6× too high at 80 keV, and up to 2.3× too high at 35 keV. APS_BLM and
-> BNL_SBDL also use ML and may be affected in the same way; they have not been checked.
-> See [Laue reflectivity check: PP vs ML](#laue-reflectivity-check-pp-vs-ml).
+There are two sets of runs:
+
+- **Current runs (2026-10-28), in `run_XRT_*_fixed/`:** made after fixing the geometry bug
+  in the scripts (`BUG_GEOMETRY.md`) and three bugs in the ML reflectivity of
+  `BentCrys2D.py` (`BUG_ML.md`).
+  - **The double-Laue beamlines (SSU_SBDL, BNL_SBDL) give usable results.**
+  - **The Bragg+Laue beamlines (SSU_BLM, SSU_BLM_PP, APS_BLM) do not:** the flux falls to
+    10⁻⁴–10⁻³ of the old values because the Bragg and Laue reflection windows no longer
+    overlap (see [Bragg+Laue beamlines](#bragglaue-beamlines-the-reflection-windows-do-not-overlap)).
+  - Two test runs (`run_XRT_SSU_BLM_test_fc0_rock/`, `run_XRT_APS_BLM_test_fc0_rock/`) show
+    what these beamlines give once the windows are aligned. They use changes that are not
+    yet in the code; see the [TODO list](#todo-decisions-pending).
+- **Old runs, in `run_XRT_*/`:** made before the fixes. They are kept for reference in
+  [Results before the fixes](#results-before-the-fixes). Their geometry was wrong for all
+  four beamlines, and their ML flux was wrong.
+
+The comparison of old and new results, energy by energy, is in `RERUN_RESULTS.md`.
 
 ## How the runs were made
 
@@ -26,6 +37,8 @@ compared with xrt 1.x results (xrt 1.x is not installed in this environment).
   overwrite each other's tensor.
 - **No display:** the runs used `MPLBACKEND=Agg`. The only warnings in the logs are matplotlib saying
   `plt.show()` cannot open a window.
+- **Folders of the current runs:** `run_XRT_<script>_fixed/`, run one after another with
+  `/usr/bin/time -v` (`time.log`). The test runs are in `run_XRT_<script>_test_fc0_rock/`.
 - **Outputs:** each folder contains `res_*_energy.txt`, the png images for each energy,
   `S_tensor.txt` and `run.log`.
 - **Header fix:** in `XRT_SSU_BLM.py` and `XRT_SSU_SBDL.py`, the
@@ -38,10 +51,10 @@ Each script makes an energy scan of a sagittally focusing bent-crystal
 monochromator. At every energy:
 
 1. **Crystal setup:**
-   - The script computes the Bragg angle, refraction-corrected. These runs used optlnls
-     `calc_Bragg_angle(corrected=True)`. The scripts now use xrt instead,
-     `get_Bragg_angle(E) - get_dtheta_symmetric_Bragg(E)`, which differs by at most
-     1.4 µrad (Si(311) at 35 keV).
+   - The script computes the Bragg angle, refraction-corrected, with xrt:
+     `get_Bragg_angle(E) - get_dtheta_symmetric_Bragg(E)`. The old runs used optlnls
+     `calc_Bragg_angle(corrected=True)`, which differs by at most 1.4 µrad (Si(311) at
+     35 keV).
    - It places the second crystal at the spacing that gives a fixed exit offset (±50 mm).
    - It computes the sagittal radius Rs from the thin-lens formula.
    - It computes the meridional radius Rm from the anticlastic ratio,
@@ -78,6 +91,217 @@ Columns of `res_*_energy.txt`:
 
 ## Main results
 
+| | Peak flux at sample (ph/s) | Horizontal size (µm) | Vertical size | Bandwidth ΔE/E | Fcurv | Status |
+|---|---|---|---|---|---|---|
+| SSU_SBDL | 4.95×10¹² at 50 keV, falling to 4.7×10⁹ at 200 keV | 34–84 | 7–16 mm (not focused vertically) | 0.16–4.3 % | 0.94–0.99 | current |
+| BNL_SBDL | 3.92×10¹² at 50 keV | 404–463 | **0.11–0.13 mm** | 0.06–0.26 % | 1.005–1.030 | current |
+| SSU_BLM | 6.7×10¹¹ at 70 keV | 26–60 | 0.5–1.0 mm | 0.03–0.8 % | 0.999–1.002 | test run only |
+| APS_BLM | 3.5×10¹¹ at 54 keV | 167–234 | 0.45–1.15 mm | 0.01–0.18 % | 0.996–1.003 | test run only |
+
+- **Fcurv is now close to 1 everywhere.** The analytic radii focus where they should. The
+  old values of 1.05–1.20 came from the geometry bug.
+- **SSU_SBDL:**
+  - Flux is 1.16–1.52× the old values. Part of the gain comes before the crystals: the
+    diamond filter is sized like the mask and clipped the misplaced beam of the old runs,
+    so `flux0` (measured after the filter) is now 2.2× higher.
+  - The horizontal focus is on the screen (55.6–56.3 m, screen at 56 m). It was about 1 m
+    upstream before.
+  - The bandwidth is 15–36% smaller above 50 keV.
+- **BNL_SBDL:**
+  - Flux is 0.25× the old value at 30–40 keV and 0.94–1.07× at 50–70 keV. The peak moved
+    from 40 to 50 keV.
+  - The geometry fix alone gives about 2× the old flux at 40 keV (`oasys_BNL_SBDL/INFO.md`),
+    so the ML fix accounts for about ×0.12 there. **This large drop is not understood yet.**
+  - The horizontal spot is larger than before (0.40–0.46 mm instead of 0.24–0.30 mm). Both
+    foci are within 0.3 m of the 56.4 m screen.
+  - The M1 mirror still gives a 0.11–0.13 mm vertical spot. Peak flux density 8.1×10¹³
+    ph/s/mm² at 50 keV (was 1.7×10¹⁴ at 40 keV).
+- **SSU_BLM and APS_BLM:** the numbers in the table come from the test runs (see below), not
+  from the scripts. They are 0.06–0.21× (SSU_BLM) and 0.16–0.36× (APS_BLM) the old flux.
+  They still depend on the open decisions, in particular the absorption coefficient.
+
+### Bragg+Laue beamlines: the reflection windows do not overlap
+
+In `run_XRT_SSU_BLM_fixed/`, `run_XRT_SSU_BLM_PP_fixed/` and `run_XRT_APS_BLM_fixed/` the
+flux is 3×10⁷–1.6×10⁹ ph/s, 10⁻⁴–10⁻³ of the old values. The few rays that reach the
+screen give meaningless sizes and bandwidths, and the Fcurv search fails at low energy
+for SSU_BLM (it stays at its 1.15 starting value).
+
+- **Before the ML fix** the bent Bragg crystal reflected R ≈ 1 over about 330 µrad, because
+  absorption had no effect (`BUG_ML.md`). Any Laue alignment fell inside that window.
+- **Now** the Bragg reflectivity is narrow, and limited by absorption with depth.
+- **The internal model takes the crystal mid-plane as the depth reference.** The
+  `PP_center_fraction` argument is stored but ignored. In the thick (10 mm) Bragg crystal
+  this shifts the reflection profile by about 160 µrad. XOPPY, and the geometry of the
+  ray tracing, use the entrance surface.
+- **The scripts align the Laue crystal at the nominal angle and never rock it.** Its
+  window therefore misses the band the Bragg crystal reflects.
+- The double-Laue beamlines depend only weakly on the depth reference. At one energy each,
+  the entrance-surface reference changes the intensity by −20% (SSU_SBDL) and +4%
+  (BNL_SBDL).
+
+### Test runs: entrance-surface reference and Laue rocking
+
+The wrapper `test_fc0_rock/run_fc0_rock.py` runs the unmodified `XRT_SSU_BLM.py` and
+`XRT_APS_BLM.py` with two changes:
+
+1. **Entrance-surface reference:** `test_fc0_rock/BentCrys2D.py` honours
+   `PP_center_fraction` (`test_fc0_rock/PP_center_fraction.diff`), and the wrapper sets it
+   to 0 for every crystal. The internal profiles then sit where XOPPY's do, within 0.1 µrad
+   (Laue ML at 80 keV: [−0.6, 43.4] µrad against XOPPY's [−0.5, 43.3]).
+2. **Rocking the Laue crystal:** before each energy, the Laue pitch is scanned from −60 to
+   +160 µrad in 5 µrad steps (100k rays, Fcurv = 1) and set to the offset that maximizes the
+   intensity. The script's own Fcurv optimization and full run then follow.
+
+Results:
+
+- **SSU_BLM:** the best offset grows with energy, from 0 at 35 keV to +120 µrad at 200 keV.
+  Rocking gains ×1–4 below 60 keV, ×8–14 at 60–85 keV and ×20–30 from 90 keV.
+- **APS_BLM:** best offset +5 to +30 µrad, gain ×1–4.
+- **Focus:** Fcurv 0.996–1.003. Horizontal focus at 55.9–56.7 m (SSU_BLM, screen 56 m) and
+  52.6–53.0 m (APS_BLM, screen 52 m).
+- **Vertical size:** 0.5–1.0 mm for SSU_BLM, against 2.3–8.2 mm in the old runs.
+- **Flux:** still well below the old values. Most of the remaining factor comes from the
+  absorption coefficient in the Bragg ML reflectivity: with xrt's total μ (current) the
+  integrated reflectivity at 80 keV is 17 µrad, against 67 µrad in XOPPY (photoelectric μ).
+  With XOPPY's μ the internal code gives 71 µrad (`BUG_ML.md`).
+
+`flux/flux0` is mostly the monochromator bandwidth divided by the simulated ±δE band, so
+it is not the crystal reflectivity.
+
+## Per-energy results
+
+The numbers below are taken from `res_*_energy.txt` in the folders named in each heading.
+Sizes are given in µm here (the files use mm). Fcurv and the H/V foci come from `run.log`.
+The fixed runs of the Bragg+Laue beamlines are not listed here; their fluxes are in
+`RERUN_RESULTS.md`.
+
+### SSU_SBDL (Si111 double Laue, PP): `run_XRT_SSU_SBDL_fixed/`
+
+The script has no vertical focusing and does not search for a vertical focus.
+
+| E [keV] | flux0 | flux | flux density | x [µm] | z [µm] | x' [mrad] | z' [mrad] | dE [keV] | Fcurv | H / V focus [m] |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 35 | 8.29e14 | 2.68e12 | 3.66e12 | 44 | 15926 | 1.223 | 0.236 | 0.061 | 0.9910 | 55.98 / — |
+| 40 | 7.60e14 | 3.79e12 | 6.64e12 | 38 | 13628 | 1.118 | 0.255 | 0.064 | 0.9885 | 55.96 / — |
+| 45 | 6.95e14 | 4.60e12 | 8.49e12 | 34 | 14493 | 1.010 | 0.213 | 0.071 | 0.9872 | 55.93 / — |
+| 50 | 6.35e14 | 4.95e12 | 1.07e13 | 34 | 12424 | 1.012 | 0.209 | 0.089 | 0.9860 | 55.95 / — |
+| 55 | 5.77e14 | 4.74e12 | 1.07e13 | 34 | 11589 | 0.885 | 0.198 | 0.123 | 0.9848 | 55.99 / — |
+| 60 | 5.23e14 | 4.31e12 | 7.71e12 | 41 | 12924 | 0.886 | 0.209 | 0.157 | 0.9835 | 55.95 / — |
+| 65 | 4.74e14 | 3.65e12 | 7.82e12 | 41 | 10847 | 0.870 | 0.183 | 0.218 | 0.9816 | 55.95 / — |
+| 70 | 4.28e14 | 2.95e12 | 5.05e12 | 52 | 10168 | 0.817 | 0.172 | 0.289 | 0.9791 | 55.92 / — |
+| 75 | 3.87e14 | 2.41e12 | 5.48e12 | 41 | 9646 | 0.780 | 0.184 | 0.381 | 0.9791 | 55.95 / — |
+| 80 | 3.49e14 | 1.86e12 | 4.03e12 | 45 | 9598 | 0.819 | 0.169 | 0.438 | 0.9785 | 55.98 / — |
+| 85 | 3.14e14 | 1.45e12 | 2.83e12 | 48 | 9359 | 0.801 | 0.169 | 0.568 | 0.9769 | 55.99 / — |
+| 90 | 2.83e14 | 1.10e12 | 2.56e12 | 47 | 8630 | 0.804 | 0.149 | 0.654 | 0.9750 | 55.99 / — |
+| 95 | 2.54e14 | 8.65e11 | 1.65e12 | 55 | 9119 | 0.713 | 0.148 | 0.839 | 0.9725 | 55.88 / — |
+| 100 | 2.29e14 | 6.48e11 | 1.22e12 | 59 | 8524 | 0.770 | 0.153 | 0.976 | 0.9719 | 55.91 / — |
+| 105 | 2.05e14 | 4.90e11 | 1.00e12 | 52 | 8799 | 0.735 | 0.152 | 1.145 | 0.9702 | 55.90 / — |
+| 110 | 1.83e14 | 3.70e11 | 6.39e11 | 62 | 8596 | 0.681 | 0.139 | 1.364 | 0.9671 | 55.83 / — |
+| 115 | 1.64e14 | 2.88e11 | 5.69e11 | 58 | 8175 | 0.699 | 0.136 | 1.517 | 0.9675 | 55.92 / — |
+| 120 | 1.47e14 | 2.17e11 | 3.81e11 | 62 | 8672 | 0.680 | 0.142 | 1.564 | 0.9675 | 55.98 / — |
+| 125 | 1.32e14 | 1.70e11 | 2.36e11 | 83 | 8389 | 0.674 | 0.136 | 2.026 | 0.9725 | 56.31 / — |
+| 130 | 1.18e14 | 1.29e11 | 2.21e11 | 67 | 8402 | 0.645 | 0.127 | 2.256 | 0.9644 | 56.13 / — |
+| 135 | 1.06e14 | 1.00e11 | 2.02e11 | 61 | 7660 | 0.686 | 0.125 | 2.660 | 0.9612 | 55.98 / — |
+| 140 | 9.39e13 | 7.62e10 | 1.28e11 | 59 | 8405 | 0.650 | 0.124 | 2.973 | 0.9593 | 55.87 / — |
+| 145 | 8.41e13 | 6.05e10 | 1.07e11 | 72 | 7606 | 0.652 | 0.121 | 3.185 | 0.9568 | 55.90 / — |
+| 150 | 7.54e13 | 4.77e10 | 7.47e10 | 75 | 8199 | 0.657 | 0.122 | 3.562 | 0.9528 | 55.72 / — |
+| 155 | 6.71e13 | 3.67e10 | 6.65e10 | 70 | 7493 | 0.638 | 0.119 | 3.807 | 0.9528 | 55.79 / — |
+| 160 | 6.00e13 | 2.91e10 | 4.81e10 | 80 | 7280 | 0.642 | 0.107 | 4.142 | 0.9478 | 55.64 / — |
+| 165 | 5.35e13 | 2.32e10 | 4.23e10 | 69 | 7500 | 0.639 | 0.113 | 4.919 | 0.9510 | 55.70 / — |
+| 170 | 4.79e13 | 1.82e10 | 3.19e10 | 73 | 7492 | 0.663 | 0.108 | 5.448 | 0.9465 | 55.70 / — |
+| 175 | 4.25e13 | 1.45e10 | 2.61e10 | 72 | 7472 | 0.621 | 0.108 | 5.493 | 0.9497 | 55.89 / — |
+| 180 | 3.79e13 | 1.16e10 | 1.81e10 | 84 | 7383 | 0.638 | 0.108 | 6.347 | 0.9510 | 56.02 / — |
+| 185 | 3.38e13 | 9.34e9 | 1.71e10 | 70 | 7290 | 0.663 | 0.110 | 6.849 | 0.9453 | 55.86 / — |
+| 190 | 3.01e13 | 7.38e9 | 1.21e10 | 81 | 7276 | 0.643 | 0.103 | 7.225 | 0.9466 | 55.76 / — |
+| 195 | 2.68e13 | 5.99e9 | 1.13e10 | 69 | 7401 | 0.665 | 0.102 | 8.143 | 0.9428 | 55.87 / — |
+| 200 | 2.39e13 | 4.75e9 | 8.09e9 | 78 | 7064 | 0.651 | 0.099 | 8.540 | 0.9379 | 55.79 / — |
+
+### BNL_SBDL (Si111 double Laue, ML, + M1): `run_XRT_BNL_SBDL_fixed/`
+
+| E [keV] | flux0 | flux | flux density | x [µm] | z [µm] | x' [mrad] | z' [mrad] | dE [keV] | Fcurv | H / V focus [m] |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 30 | 1.13e15 | 9.36e11 | 1.77e13 | 463 | 107 | 1.352 | 0.066 | 0.017 | 1.0300 | 56.59 / 56.71 |
+| 40 | 4.99e14 | 1.30e12 | 2.82e13 | 440 | 108 | 1.131 | 0.067 | 0.035 | 1.0194 | 56.35 / 56.52 |
+| 50 | 2.11e14 | 3.92e12 | 8.14e13 | 442 | 112 | 0.947 | 0.068 | 0.070 | 1.0094 | 56.22 / 56.50 |
+| 60 | 8.73e13 | 1.64e12 | 3.09e13 | 429 | 120 | 0.847 | 0.062 | 0.116 | 1.0194 | 56.40 / 56.54 |
+| 70 | 3.55e13 | 4.47e11 | 8.80e12 | 404 | 129 | 0.814 | 0.054 | 0.180 | 1.0048 | 56.39 / 56.40 |
+
+### SSU_BLM (Si311, ML), test run: `run_XRT_SSU_BLM_test_fc0_rock/`
+
+Not produced by the script: entrance-surface reference and Laue rocking (see above).
+
+| E [keV] | flux0 | flux | flux density | x [µm] | z [µm] | x' [mrad] | z' [mrad] | dE [keV] | Fcurv | H / V focus [m] | Laue offset [µrad] |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 35 | 1.66e14 | 6.77e10 | 1.61e12 | 46 | 800 | 1.886 | 0.096 | 0.016 | 0.9992 | 56.13 / 56.15 | +0 |
+| 40 | 1.52e14 | 1.50e11 | 4.67e12 | 30 | 900 | 1.950 | 0.128 | 0.024 | 0.9999 | 56.11 / 55.94 | +15 |
+| 45 | 1.39e14 | 3.03e11 | 1.08e13 | 26 | 900 | 1.961 | 0.160 | 0.030 | 0.9999 | 56.30 / 55.93 | +20 |
+| 50 | 1.27e14 | 2.55e11 | 6.06e12 | 42 | 800 | 1.703 | 0.192 | 0.038 | 0.9992 | 56.34 / 56.13 | +20 |
+| 55 | 1.15e14 | 2.90e11 | 7.10e12 | 44 | 800 | 1.832 | 0.192 | 0.042 | 1.0005 | 56.45 / 56.15 | +25 |
+| 60 | 1.05e14 | 5.55e11 | 1.93e13 | 34 | 700 | 1.972 | 0.192 | 0.043 | 0.9999 | 56.65 / 56.25 | +30 |
+| 65 | 9.48e13 | 6.60e11 | 2.44e13 | 34 | 600 | 1.713 | 0.160 | 0.038 | 0.9999 | 56.70 / 56.45 | +35 |
+| 70 | 8.52e13 | 6.70e11 | 1.95e13 | 38 | 800 | 1.832 | 0.160 | 0.034 | 0.9999 | 56.51 / 56.58 | +40 |
+| 75 | 7.73e13 | 6.28e11 | 2.65e13 | 34 | 500 | 1.541 | 0.160 | 0.027 | 0.9999 | 56.57 / 56.35 | +40 |
+| 80 | 6.97e13 | 5.90e11 | 1.80e13 | 42 | 600 | 1.627 | 0.160 | 0.023 | 1.0005 | 56.51 / 56.42 | +45 |
+| 85 | 6.28e13 | 5.16e11 | 1.63e13 | 36 | 700 | 1.616 | 0.160 | 0.045 | 0.9999 | 56.60 / 56.52 | +50 |
+| 90 | 5.64e13 | 4.65e11 | 1.47e13 | 42 | 600 | 1.498 | 0.160 | 0.061 | 1.0005 | 56.55 / 56.41 | +50 |
+| 95 | 5.08e13 | 4.03e11 | 1.40e13 | 40 | 600 | 1.509 | 0.160 | 0.093 | 1.0005 | 56.38 / 56.37 | +55 |
+| 100 | 4.55e13 | 3.53e11 | 9.75e12 | 40 | 700 | 1.541 | 0.128 | 0.122 | 1.0005 | 56.39 / 56.58 | +60 |
+| 105 | 4.08e13 | 3.03e11 | 9.83e12 | 36 | 700 | 1.422 | 0.128 | 0.157 | 1.0005 | 56.19 / 56.46 | +60 |
+| 110 | 3.66e13 | 2.60e11 | 7.40e12 | 40 | 700 | 1.390 | 0.128 | 0.180 | 0.9999 | 56.00 / 55.99 | +65 |
+| 115 | 3.27e13 | 2.19e11 | 4.79e12 | 42 | 900 | 1.369 | 0.128 | 0.241 | 1.0005 | 56.00 / 56.01 | +70 |
+| 120 | 2.93e13 | 1.84e11 | 4.19e12 | 46 | 800 | 1.336 | 0.128 | 0.280 | 1.0005 | 56.01 / 56.16 | +70 |
+| 125 | 2.63e13 | 1.54e11 | 3.32e12 | 44 | 900 | 1.347 | 0.128 | 0.341 | 0.9999 | 56.00 / 55.95 | +75 |
+| 130 | 2.36e13 | 1.30e11 | 2.59e12 | 50 | 900 | 1.347 | 0.128 | 0.391 | 1.0005 | 56.01 / 55.80 | +80 |
+| 135 | 2.10e13 | 1.12e11 | 2.27e12 | 50 | 900 | 1.272 | 0.128 | 0.454 | 1.0011 | 56.07 / 55.96 | +80 |
+| 140 | 1.87e13 | 9.37e10 | 1.42e12 | 60 | 1000 | 1.272 | 0.128 | 0.522 | 1.0017 | 56.04 / 56.23 | +85 |
+| 145 | 1.67e13 | 7.81e10 | 1.75e12 | 44 | 900 | 1.185 | 0.128 | 0.537 | 1.0005 | 56.02 / 56.13 | +85 |
+| 150 | 1.50e13 | 6.66e10 | 1.15e12 | 56 | 900 | 1.185 | 0.128 | 0.658 | 0.9992 | 55.93 / 55.85 | +90 |
+| 155 | 1.34e13 | 5.50e10 | 9.80e11 | 54 | 900 | 1.228 | 0.128 | 0.750 | 0.9992 | 55.98 / 56.05 | +95 |
+| 160 | 1.19e13 | 4.60e10 | 9.18e11 | 54 | 800 | 1.164 | 0.128 | 0.769 | 1.0024 | 56.10 / 56.17 | +95 |
+| 165 | 1.07e13 | 3.90e10 | 6.64e11 | 56 | 900 | 1.207 | 0.128 | 0.911 | 1.0024 | 56.13 / 56.06 | +100 |
+| 170 | 9.47e12 | 3.28e10 | 4.57e11 | 56 | 1000 | 1.196 | 0.128 | 0.950 | 1.0024 | 56.10 / 56.05 | +105 |
+| 175 | 8.43e12 | 2.72e10 | 5.77e11 | 52 | 800 | 1.153 | 0.128 | 1.053 | 1.0011 | 56.05 / 55.96 | +105 |
+| 180 | 7.53e12 | 2.27e10 | 4.65e11 | 54 | 800 | 1.153 | 0.096 | 1.126 | 0.9999 | 56.00 / 55.95 | +110 |
+| 185 | 6.67e12 | 1.91e10 | 2.93e11 | 58 | 1000 | 1.142 | 0.128 | 1.206 | 1.0005 | 55.96 / 55.95 | +115 |
+| 190 | 5.96e12 | 1.59e10 | 3.07e11 | 52 | 900 | 1.078 | 0.128 | 1.422 | 1.0011 | 55.98 / 55.78 | +115 |
+| 195 | 5.34e12 | 1.33e10 | 2.14e11 | 56 | 1000 | 1.142 | 0.096 | 1.422 | 0.9999 | 55.93 / 55.84 | +120 |
+| 200 | 4.74e12 | 1.12e10 | 1.91e11 | 56 | 900 | 1.078 | 0.128 | 1.595 | 0.9992 | 55.98 / 55.73 | +120 |
+
+### APS_BLM (Si311, ML), test run: `run_XRT_APS_BLM_test_fc0_rock/`
+
+Not produced by the script: entrance-surface reference and Laue rocking (see above).
+
+| E [keV] | flux0 | flux | flux density | x [µm] | z [µm] | x' [mrad] | z' [mrad] | dE [keV] | Fcurv | H / V focus [m] | Laue offset [µrad] |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 30 | 7.54e13 | 1.76e11 | 1.85e12 | 195 | 450 | 1.008 | 0.068 | 0.002 | 1.0010 | 53.03 / 52.90 | +5 |
+| 32 | 6.98e13 | 1.47e11 | 1.67e12 | 178 | 450 | 0.924 | 0.085 | 0.003 | 0.9985 | 52.96 / 52.83 | +5 |
+| 34 | 6.42e13 | 1.62e11 | 1.38e12 | 189 | 550 | 1.047 | 0.085 | 0.006 | 0.9972 | 52.77 / 52.76 | +10 |
+| 36 | 5.90e13 | 2.63e11 | 3.17e12 | 167 | 450 | 1.042 | 0.068 | 0.008 | 0.9997 | 52.84 / 52.57 | +10 |
+| 38 | 5.41e13 | 2.14e11 | 2.15e12 | 189 | 500 | 1.008 | 0.068 | 0.011 | 1.0022 | 52.71 / 52.64 | +10 |
+| 40 | 5.00e13 | 1.86e11 | 1.33e12 | 234 | 550 | 0.874 | 0.068 | 0.014 | 0.9957 | 52.58 / 52.64 | +10 |
+| 42 | 4.58e13 | 1.70e11 | 1.35e12 | 167 | 600 | 1.036 | 0.068 | 0.018 | 1.0007 | 52.73 / 52.48 | +15 |
+| 44 | 4.21e13 | 1.90e11 | 1.20e12 | 206 | 700 | 0.946 | 0.085 | 0.024 | 1.0032 | 52.67 / 52.53 | +15 |
+| 46 | 3.86e13 | 1.97e11 | 1.22e12 | 195 | 750 | 1.019 | 0.068 | 0.035 | 1.0007 | 52.63 / 52.55 | +20 |
+| 48 | 3.55e13 | 2.91e11 | 1.89e12 | 195 | 700 | 1.042 | 0.068 | 0.042 | 1.0013 | 52.80 / 52.43 | +20 |
+| 50 | 3.25e13 | 3.35e11 | 2.19e12 | 189 | 750 | 1.042 | 0.068 | 0.049 | 0.9997 | 52.71 / 52.60 | +20 |
+| 52 | 2.97e13 | 3.43e11 | 2.31e12 | 189 | 750 | 1.030 | 0.068 | 0.050 | 1.0003 | 52.69 / 52.51 | +20 |
+| 54 | 2.72e13 | 3.46e11 | 1.75e12 | 200 | 900 | 1.058 | 0.068 | 0.068 | 0.9978 | 52.75 / 52.49 | +25 |
+| 56 | 2.49e13 | 3.38e11 | 1.84e12 | 184 | 900 | 1.030 | 0.068 | 0.075 | 1.0019 | 52.84 / 52.55 | +25 |
+| 58 | 2.28e13 | 3.25e11 | 1.43e12 | 200 | 1000 | 1.058 | 0.068 | 0.091 | 1.0019 | 52.78 / 52.90 | +30 |
+| 60 | 2.09e13 | 3.16e11 | 1.37e12 | 184 | 1150 | 1.047 | 0.085 | 0.107 | 1.0000 | 52.91 / 52.59 | +30 |
+
+## Results before the fixes
+
+These are the original runs, in `run_XRT_*/`. **They are superseded:**
+
+- All four beamlines used the wrong geometry: the optics sat effectively 10 m farther
+  from the source (`BUG_GEOMETRY.md`). Fcurv, focus positions and sizes are affected.
+- The ML reflectivity was wrong: Laue too high, Bragg without absorption (`BUG_ML.md`).
+  This affects the flux of SSU_BLM, APS_BLM and BNL_SBDL.
+
+### Main results (old)
+
 | | Peak flux at sample (ph/s) | Horizontal size (µm) | Vertical size | Bandwidth ΔE/E | Fcurv |
 |---|---|---|---|---|---|
 | APS_BLM | ~1.0×10¹², flat from 38 to 54 keV | 130–160 | 1.25 → 2.5 mm | 0.05–0.35 % | 1.149–1.155 |
@@ -105,11 +329,11 @@ Columns of `res_*_energy.txt`:
 `flux/flux0` ranges from 0.03% to 5%. It is mostly the monochromator bandwidth
 divided by the simulated ±δE band, so it is not the crystal reflectivity.
 
-## Per-energy results
+### Per-energy results (old)
 
-The numbers below are taken from `run_*/res_*_energy.txt`. Sizes are given in µm here (the files use mm).
+The numbers below are taken from `run_XRT_*/res_*_energy.txt` (old runs). Sizes are given in µm here (the files use mm).
 
-### APS_BLM (Si311, ML)
+#### APS_BLM (Si311, ML)
 
 | E [keV] | flux0 | flux | flux density | x [µm] | z [µm] | x' [mrad] | z' [mrad] | dE [keV] |
 |---|---|---|---|---|---|---|---|---|
@@ -130,7 +354,7 @@ The numbers below are taken from `run_*/res_*_energy.txt`. Sizes are given in µ
 | 58 | 2.28e13 | 9.38e11 | 2.58e12 | 144 | 2400 | 1.447 | 0.056 | 0.183 |
 | 60 | 2.08e13 | 8.75e11 | 2.24e12 | 148 | 2500 | 1.447 | 0.075 | 0.211 |
 
-### BNL_SBDL (Si111 double Laue, ML, + M1)
+#### BNL_SBDL (Si111 double Laue, ML, + M1)
 
 | E [keV] | flux0 | flux | flux density | x [µm] | z [µm] | x' [mrad] | z' [mrad] | dE [keV] | Laue transmission |
 |---|---|---|---|---|---|---|---|---|---|
@@ -140,10 +364,10 @@ The numbers below are taken from `run_*/res_*_energy.txt`. Sizes are given in µ
 | 60 | 8.72e13 | 1.65e12 | 5.59e13 | 260 | 121 | 1.187 | 0.059 | 0.127 | 0.148 |
 | 70 | 3.55e13 | 4.75e11 | 2.09e13 | 239 | 109 | 1.052 | 0.050 | 0.166 | 0.102 |
 
-### SSU_BLM (Si311, ML)
+#### SSU_BLM (Si311, ML)
 
 The flux below is suspect, because the internal ML overestimates the Laue reflectivity. The
-same run with PP is in [Laue reflectivity check: PP vs ML](#laue-reflectivity-check-pp-vs-ml).
+same run with PP is in [Laue reflectivity check: PP vs ML](#laue-reflectivity-check-pp-vs-ml) (also an old run).
 
 | E [keV] | flux0 | flux | flux density | x [µm] | z [µm] | x' [mrad] | z' [mrad] | dE [keV] |
 |---|---|---|---|---|---|---|---|---|
@@ -182,7 +406,7 @@ same run with PP is in [Laue reflectivity check: PP vs ML](#laue-reflectivity-ch
 | 195 | 5.32e12 | 8.02e10 | 1.74e11 | 58 | 7700 | 1.704 | 0.293 | 2.691 |
 | 200 | 4.73e12 | 6.59e10 | 1.27e11 | 64 | 7900 | 1.591 | 0.358 | 2.860 |
 
-### SSU_SBDL (Si111 double Laue, PP)
+#### SSU_SBDL (Si111 double Laue, PP)
 
 | E [keV] | flux0 | flux | flux density | x [µm] | z [µm] | x' [mrad] | z' [mrad] | dE [keV] |
 |---|---|---|---|---|---|---|---|---|
@@ -291,17 +515,19 @@ directions. The steps are:
    - For ML they give the gradient of the deviation through the depth (`dalpha_over_dt`).
 3. **One of two models:**
    - **PP (Penning–Polder), Laue only.** The Bragg-condition point is placed at the crystal
-     mid-plane (`PP_center_fraction=0.5`). The deviation is integrated between the
+     mid-plane. `PP_center_fraction` is stored but ignored; the mid-plane is hard-coded
+     in `build_deviation_reference`, for PP and ML alike. The deviation is integrated between the
      entrance and exit faces, η_in → η_out, which differ by −βt. The intensity is the sum
      of the two wavefield branches, each with its own absorption,
      exp(−μt(1+B+D)/|γ₀|). It is multiplied by (1 − e^{−2πβc/|β|}), the loss to newly
      created wavefields when the strain gradient is large.
    - **ML (multilamellar).** The thickness is divided into N lamellae, each a perfect thin
-     crystal. The deviation step between lamellae follows from the strain gradient, and N
-     is refined ×4. Each lamella's reflectivity comes from the standard thin-crystal
+     crystal. The deviation step between lamellae follows from the strain gradient: Δy = π/2
+     (Laue) or 2 (Bragg), as in `crystal3.f90` (`ML_refinement=1`; the old runs used 4). Each lamella's reflectivity comes from the standard thin-crystal
      formulas (separate Bragg and Laue versions). The lamellae are summed incoherently,
      weighted by the transmission through the lamellae before it and by the absorption
-     along the path.
+     along the path. The susceptibilities from xrt are complex-conjugated first, to match
+     the sign convention of the formulas.
 4. **Polarization:** σ and π are computed separately, with a polarization factor of 1 and
    |cos 2θB|. The π factor uses the median over the rays.
 5. **Return value:** √R for σ and π, with no phase. That is fine for incoherent ray
@@ -310,6 +536,13 @@ directions. The steps are:
 `useTT=False`, so xrt's own Takagi–Taupin solver (pyTTE) is never used.
 
 ## Laue reflectivity check: PP vs ML
+
+> **This section describes the code and runs before the ML fixes.** With the fixes
+> (`BUG_ML.md`), the internal ML gives 30.42 µrad for the single crystal below (XOPPY ML
+> 34.02, internal PP 30.05), and the internal PP/ML ratio is 0.988 (XOPPY 0.969). The
+> comparison of the full beamline below used the old geometry and the old ML code. The
+> rerun `run_XRT_SSU_BLM_PP_fixed/` fails like the ML one (see
+> [Bragg+Laue beamlines](#bragglaue-beamlines-the-reflection-windows-do-not-overlap)).
 
 The internal reflectivity code (`bentSi_Crys.get_amplitude`) was compared with XOPPY
 (`diff_pat`, from xoppylib) for the SSU_BLM Laue crystal. The same rocking-curve
@@ -439,3 +672,21 @@ Script: `XRT_SSU_BLM_PP.py`, a copy of `XRT_SSU_BLM.py`. Results are in
   dE is a few percent smaller with PP below 100 keV.
 - **Vertical size:** typically about 10% smaller with PP, since PP puts less weight on the
   outer part of the rocking curve.
+
+## TODO (decisions pending)
+
+1. **Depth reference of the bent-crystal model.** Implement `PP_center_fraction` in
+   `BentCrys2D.py` and in OASYS2-XRT `orangecontrib/xrt/util/bent_crys_2d.py`, as in
+   `test_fc0_rock/PP_center_fraction.diff`. Decide whether to use 0 (entrance surface, as
+   XOPPY) in the scripts, as the widget default and in the `.ows` files.
+2. **Alignment of the second crystal.** Decide whether to add a per-energy rocking scan of
+   the Laue crystal to `XRT_SSU_BLM.py`, `XRT_SSU_BLM_PP.py` and `XRT_APS_BLM.py`, as in
+   `test_fc0_rock/run_fc0_rock.py`. Without it the Bragg+Laue beamlines do not transmit.
+3. **Absorption coefficient.** Keep xrt's total μ (current, 0.521 cm⁻¹ for Si at 80 keV) or
+   use the photoelectric μ as XOPPY (0.118 cm⁻¹). This changes the Bragg integrated
+   reflectivity by about ×4 (17 vs 71 µrad at 80 keV); the effect on the beamline flux has
+   not been traced.
+4. **BNL_SBDL at 30–40 keV.** Understand the drop to 0.25× the old flux.
+5. **After 1–3:** rerun SSU_BLM, SSU_BLM_PP and APS_BLM (and SSU_SBDL and BNL_SBDL if the
+   depth reference changes), update this file, `RERUN_RESULTS.md` and the `INFO.md` of the
+   OASYS workspaces, which still quote results from before the fixes.

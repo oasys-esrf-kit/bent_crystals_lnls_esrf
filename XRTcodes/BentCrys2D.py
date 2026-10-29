@@ -356,8 +356,8 @@ class bentSi_Crys(rm.CrystalSi):
         csmall_s = calc_csmall(pfac[0])
         csmall_p = calc_csmall(pfac[1])
 
-        reference_s = build_deviation_reference(polar_factor=pfac[0],beta=beta_s,csmall=csmall_s,ML_refinement=4)
-        reference_p = build_deviation_reference(polar_factor=pfac[1],beta=beta_p,csmall=csmall_p,ML_refinement=4)
+        reference_s = build_deviation_reference(polar_factor=pfac[0],beta=beta_s,csmall=csmall_s,ML_refinement=1)
+        reference_p = build_deviation_reference(polar_factor=pfac[1],beta=beta_p,csmall=csmall_p,ML_refinement=1)
         references = (reference_s,reference_p)
 
         if method == 'PP': # use Penning-Polder method PP
@@ -470,8 +470,10 @@ class bentSi_Crys(rm.CrystalSi):
         
             def ml_pol(polarFactor,reference):
              
-                qsmall = (bfac * PsiH * PsiH_ * polarFactor**2)
-                g = ((1.0 - bfac) * Psi0.imag / (2.0 * polarFactor * sqrt_abs_bfac * sqrt_abs_PsiH_))
+                # the ML formulas (crystal3.f90) use susceptibilities with negative imaginary part;
+                # xrt returns their complex conjugates
+                qsmall = (bfac * np.conj(PsiH) * np.conj(PsiH_) * polarFactor**2)
+                g = ((1.0 - bfac) * np.conj(Psi0).imag / (2.0 * polarFactor * sqrt_abs_bfac * sqrt_abs_PsiH_))
                 deltay = reference["ml_step"]
                 cry_t = reference["cry_t"]
                 nslab = reference["nslab"]
@@ -535,6 +537,7 @@ class bentSi_Crys(rm.CrystalSi):
                         att = np.nan_to_num(att, nan=0.0, posinf=0.0, neginf=0.0)
                         att = np.clip(att, 0.0, 1.0)
                         Rtot += rsmall * prodt * att
+                        tsmall_old = tsmall
                         y += deltay
 
                 Rtot = np.nan_to_num(Rtot, nan=0.0, posinf=0.0, neginf=0.0)
